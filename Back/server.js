@@ -1,0 +1,19 @@
+import express from "express";
+import dotenv from "dotenv";
+import pool from "./database/connection.js";
+import productRoutes from "./routes/productsRoute.js";
+import userRoutes from "./routes/productsRoute.js";
+import orderRoutes from "./routes/ordersRoute.js";
+
+dotenv.config();
+const app = express();
+app.use(express.json());
+
+//Rutas
+app.use("/products", productRoutes);
+app.use("/user", userRoutes);
+app.use("/orders", orderRoutes);
+
+app.listen(3000, () => {
+    console.log("Servidor corriendo en puerto 3000");
+})
