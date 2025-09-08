@@ -14,6 +14,11 @@ app.use("/products", productRoutes);
 app.use("/user", userRoutes);
 app.use("/orders", orderRoutes);
 
+// Prueba de coneccion
+app.get("/", (req, res) =>{
+    res.send("Coneccion establecida");
+})
+
 app.listen(3000, () => {
     console.log("Servidor corriendo en puerto 3000");
 })
