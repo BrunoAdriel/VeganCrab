@@ -8,6 +8,13 @@ export const insertUser = async (userName, userLastName, phone, address, pass, b
     await pool.query("INSERT INTO users (userName, userLastName, phone, address, pass, birtday) VALUES (?,?,?,?,?,?)", [userName, userLastName, phone, address, pass, birtday]);
 };
 
+// Existe el usuario
+export const isRegister = async (phone)=>{
+    const [rows] = await pool.query("SELECT phone FROM users WHERE phone = ?", [phone]);
+    return rows.length > 0 ? rows[0] : null ;
+}
+
+
 // Obtener usuario
 
 export const validateUser = async(phone, pass)=>{
@@ -18,17 +25,17 @@ export const validateUser = async(phone, pass)=>{
 // Cambio de contraseña
 
 export const newPass = async(phone, pass)=>{
-    await pool.query("UPDATE users VALUES pass = ? WHERE phone = ?",[pass, phone]);
+    await pool.query("UPDATE users SET pass = ? WHERE phone = ?",[pass, phone]);
 };
 
 // Cambiar direccion
 
 export const newAddress = async(phone, address)=>{
-    await pool.query("UPDATE users VALUES address = ? WHERE phone = ?", [address, phone]);
+    await pool.query("UPDATE users SET address = ? WHERE phone = ?", [address, phone]);
 }
 
 // Eliminar usuario
 
-export const deleteUser = async(idUser)=>{
-    await pool.query("DELETE FROM users WHERE idUser = ?", [idUser])
+export const dropUser = async(phone, pass)=>{
+    await pool.query("DELETE FROM users WHERE phone = ? AND pass = ?", [phone, pass])
 }

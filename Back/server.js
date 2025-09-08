@@ -1,11 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import pool from "./database/connection.js";
+import pool from "./database/connection.js"; //esto  tambien
 import productRoutes from "./routes/productsRoute.js";
 import userRoutes from "./routes/productsRoute.js";
 import orderRoutes from "./routes/ordersRoute.js";
 
-dotenv.config();
+dotenv.config();  //checkear esto
 const app = express();
 app.use(express.json());
 

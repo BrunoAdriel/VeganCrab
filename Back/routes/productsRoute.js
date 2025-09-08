@@ -6,7 +6,7 @@ import {importCategory, importProducts} from "../controllers/productController.j
 
 const router = express.Router();
 
-app.get("/", importProducts);
-app.get("/categorys", importCategory);
+router.get("/", importProducts);
+router.get("/categorys", importCategory);
 
 export default router;
