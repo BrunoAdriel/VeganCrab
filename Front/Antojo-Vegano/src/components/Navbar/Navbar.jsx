@@ -1,15 +1,24 @@
 // src/components/Navbar.jsx
-import React from "react";
+import React, {useState,useEffect, use} from "react";
 import './Navbar.css';
 
 const NavigationBar = () => {
+    const [categories, setCategories] = useState([]);
+
+useEffect(() => { fetch("http://localhost:3000/products/categorys")
+    .then((res) => res.json()) 
+    .then((data) => { console.log("Backend response:", data.categorys); setCategories(data.categorys); })
+    .catch((error)=> console.error("Error fetch categories", error)); }, []);
+
+
 return (<>
 <nav className="navbar navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
-    <div className="container-fluid">
+    <div className="container-fluid ">
         <a className="navbar-brand" href="#">Navbar</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -20,14 +29,20 @@ return (<>
             </li>
             <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
-            <ul className="dropdown-menu"> {/* Agregar Categorias */}
-                <li><a className="dropdown-item" href="#">Action</a></li>
-                <li><a className="dropdown-item" href="#">Another action</a></li>
-                <li><hr className="dropdown-divider"/></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
+            <ul className="dropdown-menu">
+                {/* Agregar Categorias */}
+                { categories.length > 0  ?(
+                categories.map((cat) => (<li key={cat.idCategory}>
+                                            <a className="dropdown-item" href={`/products/${cat.idCategory}`}> {cat.categoryName} </a>
+                                        </li>)
+                                )) : (
+                    <li><span className="dropdown-item">Cargando...</span></li>
+                )}
             </ul>
             </li>
         </ul>
+        </div>  
+        <div>
         <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
             <button className="btn btn-outline-success" type="submit">Buscar</button>

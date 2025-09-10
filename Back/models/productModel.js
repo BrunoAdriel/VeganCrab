@@ -6,12 +6,13 @@ import pool from "../database/connection.js";
 export const getProducts = async()=> {
     const [rows] = await pool.query(`SELECT p.idProduct, p.prodName, p.prodDescription,
                                             v.idProdVariant, v.size, v.unit_price, v.quantityStock,
-                                            i.img_url, i.main_img,
+                                            GROUP_CONCAT(i.img_url) AS images,
                                             c.categoryName
                                     FROM products p
                                     INNER JOIN products_variant v ON p.idProduct = v.idProduct
                                     INNER JOIN product_img i ON p.idProduct = i.idProduct
-                                    INNER JOIN categorys c ON p.idCategory = c.idCategory`);
+                                    INNER JOIN categorys c ON p.idCategory = c.idCategory
+                                    GROUP BY p.idProduct, v.idProdVariant, c.categoryName;`);
     return rows;
 };
 
