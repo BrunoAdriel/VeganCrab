@@ -1,0 +1,58 @@
+.logoNav{
+    width:60px;
+    height: 60px;
+    border-radius: 20%;
+}
+
+/* Botón de ícono genérico */
+.icon-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Caja de búsqueda estilo línea inferior */
+.search-box {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+}
+
+/* Input minimalista */
+.search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 6px 32px 6px 4px; /* deja espacio para la lupa final */
+    font-size: 16px;
+    width: 220px;             /* desktop */
+}
+
+.search-input::placeholder { color: #999; }
+
+/* Lupa final posicionada a la derecha del input */
+.end-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    padding: 0 4px;
+}
+
+/* ====== RESPONSIVE ====== */
+/* Desktop (≥601px): siempre visible la search-box, oculto trigger/arrow mobile */
+@media (min-width: 601px) {
+    .only-mobile { display: none !important; }
+    .search-box { display: flex; }
+}
+
+/* Mobile (≤600px): por defecto oculta la search-box, la muestra cuando .open */
+@media (max-width: 600px) {
+    .search-box { display: none; flex: 1; }
+    .search-box.open { display: flex; width: 100%; }
+    .search-input { width: 100%; }
+}
