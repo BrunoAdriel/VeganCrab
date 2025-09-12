@@ -1,6 +1,6 @@
 // LLama a las consultas SQL y armo la logica
 
-import {getProducts, getCategory} from "../models/productModel.js";
+import {getProducts, getCategory, getCarrucel} from "../models/productModel.js";
 
 // Obtengo los productos 
 export const importProducts = async (req, res) =>{
@@ -19,5 +19,15 @@ export const importCategory = async (req, res) =>{
         res.status(200).json({message:"Categorias obtenidas correctamente", categorys});
     }catch(error){
         res.status(500).json({message:"Error al importar las categorias"})
+    }
+};
+
+//obtengo la informacion para el carrusel
+export const importCarrousel = async (req, res)=> {
+    try{
+        const carrousel = await getCarrucel();
+        res.status(200).json({message:"Productos de carruosel traidos correctamente", carrousel});
+    }catch(error){
+        res.status(500).json({message:"Error al intentar importar productos  de carrousel", error})
     }
 };

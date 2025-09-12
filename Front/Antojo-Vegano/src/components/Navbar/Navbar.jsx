@@ -18,7 +18,7 @@ const NavigationBar = () => {
 // Fetch para obtener categorias
 useEffect(() => { fetch("http://localhost:3000/products/categorys")
     .then((res) => res.json()) 
-    .then((data) => { console.log("Backend response:", data.categorys); setCategories(data.categorys); })
+    .then((data) => { console.log("Backend nav:", data.categorys); setCategories(data.categorys); })
     .catch((error)=> console.error("Error fetch categories", error)); }, []);
 
 
