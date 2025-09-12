@@ -27,6 +27,7 @@ return (<>
     {/* Logo y Navegacio */}
     <div className="container-fluid ">
         <img src={logo} alt="Imagen Logo Antojo Vegano" className="logoNav"/>
+        <a className="TitleLogo">Antojo Vegano</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
         </button>
@@ -55,7 +56,7 @@ return (<>
         </ul>
         </div>
         {/* Imput Busquedas */}
-        <div className="d-flex align-items-center gap-3">
+        <div className="d-flex align-items-center gap-3 containerIcons">
             {!showSearch && (
                 <button className="icon-btn only-mobile" aria-label="Abrir búsqueda" onClick={() => setShowSearch(true)} >
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="bi bi-search d-lg-none" viewBox="0 0 16 16" role="button" onClick={() => setShowSearch(true)}>

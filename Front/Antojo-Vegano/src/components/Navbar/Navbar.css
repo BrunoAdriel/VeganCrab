@@ -4,6 +4,15 @@
     border-radius: 20%;
 }
 
+.TitleLogo{
+    margin-left:2%;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
 /* Botón de ícono genérico */
 .icon-btn {
     background: none;
@@ -55,4 +64,5 @@
     .search-box { display: none; flex: 1; }
     .search-box.open { display: flex; width: 100%; }
     .search-input { width: 100%; }
+    .containerIcons{display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 2%;}
 }
