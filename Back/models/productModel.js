@@ -26,12 +26,10 @@ export const getCategory = async() =>{
 // Obtengo productos para carrucel
 export const getCarrucel = async()=>{
     const [rows] = await pool.query(`
-            SELECT p.idProduct, p.prodName, p.prodDescription,
-            GROUP_CONCAT(i.img_url) AS images
-            FROM products p
-            INNER JOIN product_img i ON p.idProduct = i.idProduct
-            GROUP BY p.idProduct
-            LIMIT 3;
-            `);
+        SELECT idProduct, prodName, prodDescription
+        FROM products
+        WHERE idProduct IN (1,2,4)
+        ORDER BY idProduct;
+        `);
     return rows;
 }; 

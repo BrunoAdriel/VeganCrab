@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import NavigationBar from "./components/Navbar/Navbar.jsx";
-import Carrousel from './components/Carrousel/Corrousel.jsx';
+import Carrousel from './components/Carrousel/Carrousel.jsx';
+
 
 function App() {
   return (
