@@ -2,6 +2,7 @@ import React, {useState,useEffect} from "react";
 import './Carrousel.css';
 
 
+
 const Carrousel = () => {
 
     // Mapa de imagenes para el carrousel
@@ -29,17 +30,21 @@ const Carrousel = () => {
                 imgCarrusel.map((prod, idx) => {
                     // Capturo las imagenes  y lasigualo al idProdcut
                     const images = imgMap[prod.idProduct] || [];
-                    return (
-                    <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={prod.idProduct} >
-                        <div className="d-flex">
-                            {images[0] && (<img src={images[0]} className="d-block w-50" alt={`${prod.prodName}-1`}/>)}
-                            {images[1] && (<img src={images[0]} className="d-block w-50" alt={`${prod.prodName}-2`}/>)}
-                        </div>
-                        <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <h5 className="bg-dark text-white px-3 py-1 rounded">{prod.prodName}</h5>
-                            {prod.prodDescription && <p>{prod.prodDescription}</p>}
-                        </div>
-                    </div>
+                            return (
+                                <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={prod.idProduct} >
+                                    <div className="carrousel-images">
+                                        {/* Imagen 1 siempre visible */}
+                                        <img src={images[0]} alt={prod.prodName} />
+                                        {/* Imagen 2 SOLO visible en desktop */}
+                                        {images[1] && <img src={images[1]} alt={prod.prodName} />}
+                                    </div>
+                                    <div className="carousel-caption d-flex justify-content-center align-items-center ">
+                                        <div className=" caption-box animated-custom">
+                                            <h5>{prod.prodName}</h5>
+                                            <p>{prod.prodDescription}</p>
+                                        </div>
+                                    </div>
+                                </div>
                     );
                 })
                 ) : (
@@ -49,15 +54,15 @@ const Carrousel = () => {
                 </div>
                 )}
             </div>
-
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
-  </button>
+            
+            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Anterior</span>
+            </button>
+            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Proxima</span>
+            </button>
         </div>
     </>);
 };
