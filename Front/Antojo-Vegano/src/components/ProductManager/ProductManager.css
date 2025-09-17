@@ -1,4 +1,4 @@
-/* Estilo titulo con mas liean*/
+/* Estilo titulo con mas linea*/
 
 .section-title {
     display: flex;
@@ -23,10 +23,10 @@
     opacity: 0.2;
 }
 
-
+/* Estilos de las primeras CARDs */
 .card-body {
     display: flex;
-    flex-direction: column;       /* Acomoda todo en columna */
+    flex-direction: column;
     justify-content: space-between; 
 }
 
@@ -40,24 +40,83 @@
 }
 
 
+
 /* Efecto del btn */
 .button-card{
     margin-top: auto;
-    width: 50%;
-    height: 25%;
     display: flex;
     justify-content: center;
     align-self: center;
     border-radius: 5%;
-    border: 1px solid #a6a6a6;    /* borde gris clarito (podés cambiarlo) */
-    background-color: #fff;    /* fondo blanco */
-    color: #333;               /* color del ícono/texto dentro */
+    border: 1px solid #a6a6a6;
+    background-color: #fff; 
+    color: #333;  
     cursor: pointer;
     transition: all 0.3s ease; 
 }
 
 .button-card:hover {
-  background-color: rgb(242,178,142); /* rosa */
-  border-color: rgb(242,178,142);     /* cambia también el borde */
-  color: #fff;               /* cambia color de ícono/texto */
+    background-color: rgb(242,178,142); 
+    border-color: rgb(242,178,142); 
+    color: #fff;               
+}
+
+
+
+/* Bloque de cards recortadas */
+.see-more-block {
+    position: relative;
+    margin-top: 30px;
+}
+
+/* Solo se muestra la parte superior de las imágenes */
+.cropped-row {
+    overflow: hidden;
+    max-height: 350px; /* ajustá la altura visible */
+    pointer-events: none; /* no clickeable */
+}
+
+/* Efecto de difuminado en el borde inferior */
+.cropped-row::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px; /* altura del difuminado */
+    background: linear-gradient(
+    rgba(255, 255, 255, 0) 0%,  /* transparente arriba */
+    rgba(255, 255, 255, 1) 100% /* blanco abajo */
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cropped-card img {
+    object-fit: cover;
+    height: 400px; /* más alto que el contenedor para que se vea cortado */
+}
+
+/* Botón superpuesto */
+.see-more-btn-container {
+    position: absolute;
+    bottom: 20px; /* pegado al borde inferior del recorte */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.btn-see-more {
+    background-color: #fff;
+    border: 1px solid ;
+    color: black ;
+    padding: 8px 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.btn-see-more:hover {
+    background-color: rgb(242,178,142); 
+    color: #fff;
 }

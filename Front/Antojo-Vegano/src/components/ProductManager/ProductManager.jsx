@@ -5,6 +5,18 @@ import './ProductManager.css';
 const ProductManager = ()  => {
     const [listProd, setListProd] = useState([]);
 
+    /* Mapa de fotos de los productos */
+    const imgMap = {
+        1: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
+        2: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
+        3: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg'],
+        4: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate2.jpg'],
+        5: [''],
+        6: ['../../../public/Products/Hojaldradas/cañonDdl.jpg'],
+        7: ['../../../public/Products/Hojaldradas/Medialunas1.jpg'],
+        8: ['../../../public/Products/Hojaldradas/cañonDdl.jpg']
+    }
+
     useEffect(()=>{fetch("http://localhost:3000/products")
         .then((res)=> res.json())
         .then((data)=> {console.log("Datos sobre Productos:", data.products); setListProd(data.products); })
@@ -20,11 +32,11 @@ const ProductManager = ()  => {
         </div>
 
         {/* Cards */}      
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 mx-4">
-            {listProd.map((prod)=>{
-                const images = prod.images ? prod.images.split(","): [];
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 mx-4 my-2">
+            {listProd.slice(0,4).map((prod)=>{
+                const images = imgMap[prod.idProduct] || [];
                 const price = prod.minPrice === prod.maxPrice ? `$ ${prod.minPrice}` : `$ ${prod.minPrice} - $ ${prod.maxPrice}` 
-                {/* Agrego los productos */}
+                {/* Agrego 4 primeros productos "Destacados" */}
                 return(
                     <div className="col" key={prod.idProduct}>
                         <div className="card h-100">
@@ -39,6 +51,28 @@ const ProductManager = ()  => {
                     </div>
                 );
             })}
+        </div>
+        {/* Segunda fila de productos con vinculo a productos */}
+        <div className="see-more-block">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 mx-4 my-2 cropped-row">
+            {listProd.slice(4,8).map((prod)=>{
+                const images = imgMap[prod.idProduct] || []; 
+                {/* Agrego 4 productos de sola imagenes  */}
+                return(
+                    <div className='col' key={prod.idProducto}>
+                        <div className='card h-100 product-preview'>
+                            <div className="card cropped-card">
+                            <img src={images[0] || "/placeholder.jpg" } className='card-img-top' alt={prod.prodName} />
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+            {/* Botón VER MÁS */}
+            <div className="see-more-btn-container">
+                <button className="btn-see-more">VER MÁS</button>
+            </div>
         </div>
     </>)
 }
