@@ -34,3 +34,23 @@ export const getCarrucel = async()=>{
         `);
     return rows;
 }; 
+
+
+//Obtengo la informacion del producto seleccionado
+export const getProductId = async(id)=>{
+    const [rows] = await pool.query(`
+        SELECT  p.idProduct, p.prodName, p.prodDescription,
+                c.categoryName, 
+                v.size, v.unit_price                
+        FROM products p
+        INNER JOIN categorys c ON p.idCategory = c.idCategory
+        LEFT JOIN products_variant v ON p.idProduct = v.idProduct
+        WHERE p.idProduct = ?`, [id]);
+    return rows;
+};
+
+/* 
+GROUP_CONCAT(i.img_url, i.main_img SEPARATOR '|') AS images
+                LEFT JOIN product_img i ON p.idProduct = i.idProduct
+                GROUP BY p.idProduct
+*/
