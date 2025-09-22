@@ -1,3 +1,7 @@
+.navbar{
+    background-color: rgb(242,178,142);
+}
+
 .logoNav{
     width:60px;
     height: 60px;
@@ -13,6 +17,14 @@
     align-items: center;
 }
 
+.center-item {
+    flex-grow: 1;       /* ocupa todo el espacio disponible */
+    display: flex;
+    justify-content: center;
+}
+
+
+
 /* Botón de ícono genérico */
 .icon-btn {
     background: none;
@@ -27,7 +39,7 @@
 .search-box {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #000000;
     position: relative;
 }
 
@@ -41,7 +53,7 @@
     width: 220px;             /* desktop */
 }
 
-.search-input::placeholder { color: #999; }
+.search-input::placeholder { color: #000000; }
 
 /* Lupa final posicionada a la derecha del input */
 .end-icon {
@@ -64,5 +76,5 @@
     .search-box { display: none; flex: 1; }
     .search-box.open { display: flex; width: 100%; }
     .search-input { width: 100%; }
-    .containerIcons{display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 2%;}
+    .containerIcons{ display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 2%; }
 }

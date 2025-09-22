@@ -11,7 +11,7 @@ const ProductManager = ()  => {
         2: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
         3: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg'],
         4: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate2.jpg'],
-        5: [''],
+        5: ['../../../public/Products/Hojaldradas/Medialunas1.jpg'],
         6: ['../../../public/Products/Hojaldradas/cañonDdl.jpg'],
         7: ['../../../public/Products/Hojaldradas/Medialunas1.jpg'],
         8: ['../../../public/Products/Hojaldradas/cañonDdl.jpg']
@@ -45,7 +45,10 @@ const ProductManager = ()  => {
                                                 <h5 className="card-title">{prod.prodName}</h5>
                                                 <p className="card-text">{prod.prodDescription}</p>
                                                 <p className="card-text">{price} </p>
-                                                <button className='button-card' id={prod.idProduct}>Seleccionar Opcion</button>
+                                                <button className='button-card' id={prod.idProduct}>
+                                                    <span>Seleccionar </span>
+                                                    <span> Opcion</span>
+                                                </button>
                                             </div>
                         </div>
                     </div>

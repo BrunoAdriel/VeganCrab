@@ -45,6 +45,8 @@
 .button-card{
     margin-top: auto;
     display: flex;
+    white-space: normal !important; 
+    flex-direction: column;
     justify-content: center;
     align-self: center;
     border-radius: 5%;
