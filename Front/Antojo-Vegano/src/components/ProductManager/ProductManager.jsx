@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ProductCard from '../ProductCard/ProductCard.jsx';
 import './ProductManager.css';
 
 
@@ -17,7 +18,7 @@ const ProductManager = ()  => {
         8: ['../../../public/Products/Hojaldradas/cañonDdl.jpg']
     }
 
-    useEffect(()=>{fetch("http://localhost:3000/products")
+    useEffect(()=>{fetch("http://localhost:3000/products/cards")
         .then((res)=> res.json())
         .then((data)=> {console.log("Datos sobre Productos:", data.products); setListProd(data.products); })
         .catch((error) => console.error("Error en el Fetch de Productos", error));
@@ -39,7 +40,8 @@ const ProductManager = ()  => {
                 {/* Agrego 4 primeros productos "Destacados" */}
                 return(
                     <div className="col" key={prod.idProduct}>
-                        <div className="card h-100">
+                        <ProductCard product={prod} images={images} price={price}/>
+{/* {                        <div className="card h-100">
                             <img src={images[0] || "/placeholder.jpg" } className="card-img-top" alt={prod.prodName} />
                                             <div className="card-body">
                                                 <h5 className="card-title">{prod.prodName}</h5>
@@ -47,7 +49,7 @@ const ProductManager = ()  => {
                                                 <p className="card-text">{price} </p>
                                                 <button className='button-card' id={prod.idProduct}>Seleccionar Opcion</button>
                                             </div>
-                        </div>
+                        </div>} */}
                     </div>
                 );
             })}

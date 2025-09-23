@@ -1,6 +1,6 @@
 // LLama a las consultas SQL y armo la logica
 
-import {getProducts, getCategory, getCarrucel, getProductId} from "../models/productModel.js";
+import {getProducts, getCategory, getCarrucel, getProductId, getProductsCard} from "../models/productModel.js";
 
 // Obtengo los productos 
 export const importProducts = async (req, res) =>{
@@ -43,3 +43,13 @@ export const importProductId = async (req, res)=>{
         res.status(500).json({message:"Error al obtener el producto seleccionado", error})
     }
 };
+
+// Manejo la obtencion de los productos
+export const importProductsCard = async (req, res)=>{
+    try{
+        const products = await getProductsCard();
+        res.status(200).json({message:"Productos de Card obtenidos correctamente", products});
+    }catch(error){
+        res.status(500).json({message:"Error al obtener los productos para las cards", error})
+    }
+}
