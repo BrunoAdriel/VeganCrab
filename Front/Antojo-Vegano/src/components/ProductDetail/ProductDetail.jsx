@@ -5,6 +5,17 @@ import { useParams } from "react-router-dom";
 
 const ProductDetail = () =>{
     const [product, setProduct] = useState(null);
+    const [quantity, setQuantity]= useState("");
+
+
+    /* Handledel input */
+    const handleAddToCart = () =>{
+        if(!quantity ||  parseInt(quantity)<=0){
+            alert("Por favor, ingresa una cantidad valida");
+            return;
+        }console.log(`Agregaste al carrito: ${quantity} unidades de  ${product.prodName}`);
+    };
+
 /*     const { id }= useParams();
 
     
@@ -34,9 +45,14 @@ const ProductDetail = () =>{
         <div className="info-section">
             <h2>{product.prodName}</h2>
             <p>{product.prodDescription}</p>
-            <p className="price">
-            {product.unit_price ? `$${product.unit_price}` : "Consultar precio"}
-            </p>
+            <p className="price">{product.unit_price ? `$${product.unit_price}` : "Consultar precio"} </p>
+
+            {/* Input de cantidad */}
+            <div className="quantity-wrapper">
+                <label htmlFor="quantity">Cantidad</label>
+                <input id="quantity" type="number" min="1" value={quantity} required onChange={(e)=> setQuantity(e.target.value)}/>
+            </div>
+            <button onClick={handleAddToCart} className="btn-add"> Añadir al carrito</button>
         </div>
     </div>
 
