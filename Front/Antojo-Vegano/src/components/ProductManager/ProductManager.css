@@ -16,12 +16,6 @@
     white-space: nowrap; 
 }
 
-.section-title span {
-    flex: 1; 
-    height: 2px; 
-    background-color: #000; 
-    opacity: 0.2;
-}
 
 /* Estilos de las primeras CARDs */
 .card-body {
@@ -49,7 +43,7 @@
     flex-direction: column;
     justify-content: center;
     align-self: center;
-    border-radius: 5%;
+    border-radius: 20px;
     border: 1px solid #a6a6a6;
     background-color: #fff; 
     color: #333;  

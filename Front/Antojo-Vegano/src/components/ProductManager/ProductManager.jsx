@@ -45,10 +45,7 @@ const ProductManager = ()  => {
                                                 <h5 className="card-title">{prod.prodName}</h5>
                                                 <p className="card-text">{prod.prodDescription}</p>
                                                 <p className="card-text">{price} </p>
-                                                <button className='button-card' id={prod.idProduct}>
-                                                    <span>Seleccionar </span>
-                                                    <span> Opcion</span>
-                                                </button>
+                                                <button className='button-card' id={prod.idProduct}>Seleccionar Opcion</button>
                                             </div>
                         </div>
                     </div>

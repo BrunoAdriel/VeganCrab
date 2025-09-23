@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from "react";
 import './ProductDetail.css';
 import logo from '../../assets/LogoAntojo.jpg';
+import medialuna1 from '../../../public/Products/Hojaldradas/CrossaintDeChocolate2.jpg';
+import medialuna2 from '../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg';
 import { useParams } from "react-router-dom";
 
 const ProductDetail = () =>{
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity]= useState("");
-
+    const [mainImg, setMainImg] = useState(logo);
 
     /* Handledel input */
     const handleAddToCart = () =>{
@@ -48,11 +50,18 @@ const ProductDetail = () =>{
             <p className="price">{product.unit_price ? `$${product.unit_price}` : "Consultar precio"} </p>
 
             {/* Input de cantidad */}
-            <div className="quantity-wrapper">
+            <div className="quantity-wrapper d-flex align-items-center">
                 <label htmlFor="quantity">Cantidad</label>
                 <input id="quantity" type="number" min="1" value={quantity} required onChange={(e)=> setQuantity(e.target.value)}/>
             </div>
-            <button onClick={handleAddToCart} className="btn-add"> Añadir al carrito</button>
+            <div className="d-flex justify-content-center">
+                <button onClick={handleAddToCart} className="btn-add"> Añadir al carrito</button>
+            </div>
+                    {/* Miniaturas */}
+            <div className="thumbnail-gallery">
+                <img src={logo} alt="Thumb1" onClick={()=> setMainImg(logo)} />
+                <img src={logo} alt="Thumb2" onClick={()=> setMainImg(logo)} />
+            </div>
         </div>
     </div>
 
