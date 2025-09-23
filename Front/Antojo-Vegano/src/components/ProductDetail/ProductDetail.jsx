@@ -9,6 +9,7 @@ const ProductDetail = () =>{
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity]= useState("");
     const [mainImg, setMainImg] = useState(logo);
+    const [fade, setFade] = useState(false);
 
     /* Handledel input */
     const handleAddToCart = () =>{
@@ -17,6 +18,16 @@ const ProductDetail = () =>{
             return;
         }console.log(`Agregaste al carrito: ${quantity} unidades de  ${product.prodName}`);
     };
+
+
+    /* Handle fade img */
+    const handleImage = (img)=>{
+        setFade(true); // activa el fade-out
+        setTimeout(()=>{
+            setMainImg(img);
+            setFade(false); // Activa el fade-in
+        }, 200)
+    }
 
 /*     const { id }= useParams();
 
@@ -42,7 +53,7 @@ const ProductDetail = () =>{
 
     <div className="product-detail">
         <div className="image-section">
-            <img src={logo || "/placeholder.jpg"} alt={product.prodName} />
+            <img src={mainImg || "/placeholder.jpg"} alt={product.prodName} className={`main-image ${fade ? "fade" : ""}`}/>
         </div>
         <div className="info-section">
             <h2>{product.prodName}</h2>
@@ -57,10 +68,10 @@ const ProductDetail = () =>{
             <div className="d-flex justify-content-center">
                 <button onClick={handleAddToCart} className="btn-add"> Añadir al carrito</button>
             </div>
-                    {/* Miniaturas */}
+
             <div className="thumbnail-gallery">
-                <img src={logo} alt="Thumb1" onClick={()=> setMainImg(logo)} />
-                <img src={logo} alt="Thumb2" onClick={()=> setMainImg(logo)} />
+                {[medialuna2, logo, medialuna1, logo].map((img, i) => (
+                <img key={i} src={img} alt={`Thumb ${i + 1}`} className={mainImg === img ? "active-thumb" : ""} onClick={() => handleImage(img)} />))}
             </div>
         </div>
     </div>
