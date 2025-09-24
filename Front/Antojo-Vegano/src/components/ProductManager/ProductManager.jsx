@@ -6,6 +6,13 @@ import './ProductManager.css';
 const ProductManager = ()  => {
     const [listProd, setListProd] = useState([]);
 
+        useEffect(()=>{fetch("http://localhost:3000/products/cards")
+        .then((res)=> res.json())
+        .then((data)=> {console.log("Datos sobre Productos:", data.products); setListProd(data.products); })
+        .catch((error) => console.error("Error en el Fetch de Productos", error));
+    },[])
+
+
     /* Mapa de fotos de los productos */
     const imgMap = {
         1: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
@@ -18,38 +25,23 @@ const ProductManager = ()  => {
         8: ['../../../public/Products/Hojaldradas/cañonDdl.jpg']
     }
 
-    useEffect(()=>{fetch("http://localhost:3000/products/cards")
-        .then((res)=> res.json())
-        .then((data)=> {console.log("Datos sobre Productos:", data.products); setListProd(data.products); })
-        .catch((error) => console.error("Error en el Fetch de Productos", error));
-    },[])
-
-
     return(<>
+    {/* Titulo con estilo */}
         <div className="section-title">
             <span></span>
             <h2>Nuestros Productos</h2>
             <span></span>
         </div>
 
-        {/* Cards */}      
+        {/* Cards inyectadas */}      
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 mx-4 my-2">
             {listProd.slice(0,4).map((prod)=>{
                 const images = imgMap[prod.idProduct] || [];
                 const price = prod.minPrice === prod.maxPrice ? `$ ${prod.minPrice}` : `$ ${prod.minPrice} - $ ${prod.maxPrice}` 
-                {/* Agrego 4 primeros productos "Destacados" */}
+                {/* Agrego 4 primeros productos */}
                 return(
                     <div className="col" key={prod.idProduct}>
                         <ProductCard product={prod} images={images} price={price}/>
-{/* {                        <div className="card h-100">
-                            <img src={images[0] || "/placeholder.jpg" } className="card-img-top" alt={prod.prodName} />
-                                            <div className="card-body">
-                                                <h5 className="card-title">{prod.prodName}</h5>
-                                                <p className="card-text">{prod.prodDescription}</p>
-                                                <p className="card-text">{price} </p>
-                                                <button className='button-card' id={prod.idProduct}>Seleccionar Opcion</button>
-                                            </div>
-                        </div>} */}
                     </div>
                 );
             })}

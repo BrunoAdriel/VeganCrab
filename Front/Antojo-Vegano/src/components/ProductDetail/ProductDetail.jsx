@@ -5,6 +5,7 @@ import medialuna1 from '../../../public/Products/Hojaldradas/CrossaintDeChocolat
 import medialuna2 from '../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg';
 import { useParams } from "react-router-dom";
 
+
 const ProductDetail = () =>{
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity]= useState("");
@@ -50,7 +51,7 @@ const ProductDetail = () =>{
         if(!product)return <p>Cargando...</p>;
 
     return(<>
-
+    {/* Card Principal */}
     <div className="product-detail">
         <div className="image-section">
             <img src={mainImg || "/placeholder.jpg"} alt={product.prodName} className={`main-image ${fade ? "fade" : ""}`}/>
@@ -68,14 +69,15 @@ const ProductDetail = () =>{
             <div className="d-flex justify-content-center">
                 <button onClick={handleAddToCart} className="btn-add"> Añadir al carrito</button>
             </div>
-
+            {/* Imagenes extras */}
             <div className="thumbnail-gallery">
                 {[medialuna2, logo, medialuna1, logo].map((img, i) => (
                 <img key={i} src={img} alt={`Thumb ${i + 1}`} className={mainImg === img ? "active-thumb" : ""} onClick={() => handleImage(img)} />))}
             </div>
         </div>
     </div>
-
+    {/* Carruosel de productos */}
+    
     </>)
 }
 

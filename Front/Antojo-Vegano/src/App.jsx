@@ -4,6 +4,8 @@ import NavigationBar from "./components/Navbar/Navbar.jsx";
 import Carrousel from './components/Carrousel/Carrousel.jsx';
 import ProductManager from './components/ProductManager/ProductManager.jsx';
 import ProductDetail from './components/ProductDetail/ProductDetail.jsx';
+import CarrouselProducts from './components/CarrouselProducts/CarrouselProducts.jsx';
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <h1>Hola mundo</h1>
       </div>
       <ProductDetail></ProductDetail>
+      <CarrouselProducts></CarrouselProducts>
     </>
   )
 }
