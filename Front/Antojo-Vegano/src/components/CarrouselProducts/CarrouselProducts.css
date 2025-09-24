@@ -1,49 +1,59 @@
 .custom-carousel-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  margin: 40px auto;
+    position: relative;
+    width: 100%;
+    margin: 40px auto;
+    overflow: hidden;
 }
 
 .custom-carousel-wrapper {
-  overflow: hidden;
-  width: 100%;
+    overflow: hidden;
+    width: 100%; /* ocupa todo el ancho del container */
 }
 
 .custom-carousel-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
 }
 
 .custom-carousel-item {
-  flex: 0 0 20%; /* 100 / 5 = 20% → 5 items visibles */
-  max-width: 20%;
-  box-sizing: border-box;
-  padding: 0 10px;
+    flex: 0 0 calc(100% / 5); /* 5 items visibles */
+    box-sizing: border-box;
+    padding: 0 10px; /* espacio entre cards */
 }
 
+.custom-carousel-item .card {
+    height: 100%;
+}
+
+.custom-carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Botones */
 .custom-carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
 }
 
 .custom-carousel-btn.prev {
-  left: 10px;
+    left: 10px;
 }
 
 .custom-carousel-btn.next {
-  right: 10px;
+    right: 10px;
 }
 
 .custom-carousel-btn:hover {
-  background: rgba(233, 30, 99, 0.8); /* rosa hover */
+    background: rgba(69, 69, 69, 0.898);
 }

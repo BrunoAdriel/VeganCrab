@@ -5,7 +5,9 @@
     height: 100vh;
     flex-direction: row;
     margin: 0px 54px;
-    
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 
@@ -115,4 +117,36 @@
 
 .thumbnail-gallery img.active-thumb {
     border: 2px solid #000000 
+}
+
+
+
+/* Después de los 600px */
+@media (max-width: 600px) {
+.product-detail {
+    flex-direction: column;  
+    height: auto;
+    margin: 10px;
+}
+
+.image-section {
+    flex: none;                
+    height: 250px;           
+}
+
+.image-section img {
+    height: 100%;
+    border-radius: 0;         
+}
+
+.info-section {
+    flex: none;
+    width: 100%; 
+}
+
+  /* Ajuste para las miniaturas */
+.thumbnail-gallery img {
+    width: 100px;
+    height: 100px;
+}
 }

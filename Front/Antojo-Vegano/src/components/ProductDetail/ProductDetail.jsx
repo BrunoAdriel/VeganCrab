@@ -3,6 +3,7 @@ import './ProductDetail.css';
 import logo from '../../assets/LogoAntojo.jpg';
 import medialuna1 from '../../../public/Products/Hojaldradas/CrossaintDeChocolate2.jpg';
 import medialuna2 from '../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg';
+import CarrouselProducts from "../CarrouselProducts/CarrouselProducts.jsx";
 import { useParams } from "react-router-dom";
 
 
@@ -77,7 +78,14 @@ const ProductDetail = () =>{
         </div>
     </div>
     {/* Carruosel de productos */}
-    
+        <div className="section-title">
+            <span></span>
+            <h2>Productos similares</h2>
+            <span></span>
+        </div>
+        <section>
+            <CarrouselProducts/>
+        </section>
     </>)
 }
 
