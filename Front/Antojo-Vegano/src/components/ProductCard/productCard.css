@@ -17,12 +17,14 @@
 /* Efecto del btn */
 .button-card{
     margin-top: auto;
+    text-decoration: none;
     display: flex;
     white-space: normal !important; 
     flex-direction: column;
     justify-content: center;
     align-self: center;
     border-radius: 20px;
+    padding: 1%;
     border: 1px solid #a6a6a6;
     background-color: #fff; 
     color: #333;  

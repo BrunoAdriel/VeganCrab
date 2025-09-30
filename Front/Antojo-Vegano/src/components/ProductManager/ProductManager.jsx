@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ProductCard from '../ProductCard/ProductCard.jsx';
 import './ProductManager.css';
+import { Link } from "react-router-dom";
+import Carrousel from '../Carrousel/Carrousel.jsx';
 
 
 const ProductManager = ()  => {
@@ -26,6 +28,11 @@ const ProductManager = ()  => {
     }
 
     return(<>
+    {/* Importo el carrousel */}
+    <div>
+        <Carrousel/>
+    </div>
+
     {/* Titulo con estilo */}
         <div className="section-title">
             <span></span>
@@ -65,7 +72,7 @@ const ProductManager = ()  => {
         </div>
             {/* Botón VER MÁS */}
             <div className="see-more-btn-container">
-                <button className="btn-see-more">VER MÁS</button>
+                <Link to="/productos" className="btn-see-more">VER MÁS</Link>
             </div>
         </div>
     </>)

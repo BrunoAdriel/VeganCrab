@@ -1,21 +1,23 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/Navbar/Navbar.jsx";
-import Carrousel from './components/Carrousel/Carrousel.jsx';
 import ProductManager from './components/ProductManager/ProductManager.jsx';
 import ProductDetail from './components/ProductDetail/ProductDetail.jsx';
+import ProductComponent from './components/ProductComponent/ProductComponent.jsx';
 
 
 function App() {
   return (
     <>
-    <NavigationBar></NavigationBar>
-    <Carrousel></Carrousel>
-    <ProductManager></ProductManager>
-      <div>
-        <h1>Hola mundo</h1>
-      </div>
-      <ProductDetail></ProductDetail>
+    <Router>
+      <NavigationBar></NavigationBar>
+      <Routes>
+        <Route path='/' element={<ProductManager/>} />
+        <Route path='/products/:id' element={<ProductDetail/>} />
+        <Route path='/productos' element={<ProductComponent/>} />
+      </Routes>
+    </Router>
     </>
   )
 }
