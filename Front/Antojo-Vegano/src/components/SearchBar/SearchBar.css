@@ -1,0 +1,78 @@
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Base input */
+.search-box {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    position: relative;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 6px 32px 6px 4px;
+    font-size: 16px;
+    width: 220px;
+}
+
+/* Botón de ícono genérico */
+.icon-btn {
+    background: none;  
+    border: none;       
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Aseguramos que los svg ocupen el espacio justo */
+.icon-btn svg {
+    display: block;
+    width: 35px;   
+    height: 35px;
+    fill: currentColor; 
+}
+
+.icon {
+    font-size: 25px;
+    display: inline-block;
+}
+
+.end-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    padding: 0 4px;
+}
+
+/* Variant NAV */
+.search-container.nav .search-box {
+    border-bottom: 1px solid #000;
+}
+
+@media (min-width: 601px) {
+    .only-mobile { display: none !important;}
+    .search-box { display: flex;}
+}
+
+@media (max-width: 600px) {
+    .search-box { display: none; flex: 1; }
+    .search-box.open { display: flex; width: 100%; }
+    .search-input { width: 100%; }
+}
+
+/* Variant PRODUCT (siempre visible, distinto fondo) */
+.search-container.default .search-box,
+.search-container.product .search-box {
+    display: flex !important;
+    background: #f0f0f0; /* ejemplo para diferenciar */
+    border-radius: 8px;
+    padding: 4px 8px;
+}

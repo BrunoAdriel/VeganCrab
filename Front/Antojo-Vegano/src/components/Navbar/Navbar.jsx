@@ -7,26 +7,17 @@ import SearchBar from "../SearchBar/SearcBar";
 
 const NavigationBar = () => {
     const [categories, setCategories] = useState([]);
-    const [showSearch, setShowSearch] = useState(false);
-    
     
     const handleSearch = (query) => {
         console.log("Buscaste desde Nav:", query);
     };
 
-/*     const [query,setQuery] =useState("");
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        if(!query.trim()) return;
-        console.log("Buscaste:", query); // Cambiar por Query  de SQL  
-    } */
-
-// Fetch para obtener categorias
-useEffect(() => { fetch("http://localhost:3000/products/categorys")
-    .then((res) => res.json()) 
-    .then((data) => { console.log("Backend nav:", data.categorys); setCategories(data.categorys); })
-    .catch((error)=> console.error("Error fetch categories", error)); }, []);
+    // Fetch para obtener categorias
+    useEffect(() => { fetch("http://localhost:3000/products/categorys")
+        .then((res) => res.json()) 
+        .then((data) => { console.log("Backend nav:", data.categorys); setCategories(data.categorys); })
+        .catch((error)=> console.error("Error fetch categories", error)); }, []);
 
 
 return (<>
@@ -67,7 +58,8 @@ return (<>
         {/* Imput Busquedas */}
         <div className="d-flex align-items-center gap-3 containerIcons">
 
-                <SearchBar variant="nav" onSearch={handleSearch} />
+            {/* Inyecto el buscador generico */}
+            <SearchBar variant="nav" onSearch={handleSearch} />
             
             {/* Redes Sociales */}
             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-instagram" viewBox="0 0 17 17">

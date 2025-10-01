@@ -1,0 +1,6 @@
+.container-filter{
+    display: flex;
+    background-color: antiquewhite;
+    width: 300px;
+    height: 400px;
+}
