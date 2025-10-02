@@ -7,18 +7,20 @@ const ProductComponent = () =>{
     const [products, setProducts] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [categories, setCategories] = useState([]);
-    
+    const [currentPage, setCurrentPage] = useState(1);
+    const productPage = 15;
+
 
         useEffect(()=>{fetch("http://localhost:3000/products")
             .then((res)=> res.json())
             .then((data)=> {console.log("Datos sobre Productos:", data.products); setProducts(data.products)
-                
+
             // obtener categorías únicas
-const uniqueCats = [
-  ...new Set(data.products.map((prod) => prod.categoryName)),
-];
-setCategories(uniqueCats);
-                })
+            const uniqueCats = [
+                                ...new Set(data.products.map((prod) => prod.categoryName)),
+                              ];
+            setCategories(uniqueCats);
+                            })
             .catch((error) => console.error("Error en el Fetch de Productos", error));
         },[]);
     
@@ -27,97 +29,101 @@ setCategories(uniqueCats);
     };
     
     // filtrar productos por categoría
-    const filteredProducts =
-  selectedCategory === "all"
-    ? products
-    : products.filter((prod) => prod.categoryName === selectedCategory);
+    const filteredProducts = selectedCategory === "all" ? products : products.filter((prod) => prod.categoryName === selectedCategory);
 
     /* Mapa de fotos de los productos */
     const imgMap = {
-        1: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
+        1: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate2.jpg'],
         2: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
         3: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg'],
         4: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate2.jpg'],
         5: ['../../../public/Products/Hojaldradas/Medialunas1.jpg'],
         6: ['../../../public/Products/Hojaldradas/cañonDdl.jpg'],
         7: ['../../../public/Products/Hojaldradas/Medialunas1.jpg'],
-        8: ['../../../public/Products/Hojaldradas/cañonDdl.jpg']
+        8: ['../../../public/Products/Hojaldradas/cañonDdl.jpg'],
+        9: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
+        10: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
+        11: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg'],
+        12: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate2.jpg'],
+        13: ['../../../public/Products/Hojaldradas/Medialunas1.jpg'],
+        14: ['../../../public/Products/Hojaldradas/cañonDdl.jpg'],
+        15: ['../../../public/Products/Hojaldradas/Medialunas1.jpg'],
+        16: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
+        17: ['../../../public/Products/Hojaldradas/Medialunas2.jpg'],
+        18: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg'],
+        19: ['../../../public/Products/Hojaldradas/CrossaintDeChocolate2.jpg'],
+        20: ['../../../public/Products/Hojaldradas/Medialunas1.jpg']
     }
 
-
+    // Paginacion
+    const totalPages = Math.ceil(filteredProducts.length / productPage);
+    const startIndex = (currentPage - 1) * productPage;
+    const currentProducts = filteredProducts.slice( startIndex, startIndex + productPage );
+console.log("Total productos filtrados:", filteredProducts.length);
+console.log("Mostrando en esta página:", currentProducts.length, "Página:", currentPage);
     return(<>
-        {/* Titulo de Productos */}
-        <div className="section-title">
-            <span></span>
-            <h2>Nuestros Productos</h2>
-            <span></span>
-        </div>
-    
+
         {/* Inyecto el buscador */}
         <div className="container">
                 <SearchBar variant="product" onSearch={handleSearch} />
-        
-      {/* Titulo dinámico */}
-        <div>
-            <h2>
-            {selectedCategory === "all"
-                ? "Nuestros Productos"
-                : `Categoría: ${selectedCategory}`}
-            </h2>
         </div>
-
         {/* Filtros */}
-{/*         <div className="container-filter">
-            
+        <div className="product-layout">
+        <aside className="sidebar">
             <ul>
-
-            </ul>
-        </div> */}
-        <div className="container-filter">
-            <ul>
-                <li className={selectedCategory === "all" ? "active" : ""} onClick={() => setSelectedCategory("all")} > 
+                <li className={selectedCategory === "all" ? "active" : ""} onClick={() => {setSelectedCategory("all") ; setCurrentPage(1);} }> 
                     Todos
                 </li>
             {categories.map((cat) => (
-                <li key={cat} className={selectedCategory === cat ? "active" : ""} onClick={() => setSelectedCategory(cat)} >
+                <li key={cat} className={selectedCategory === cat ? "active" : ""} onClick={() => {setSelectedCategory(cat); setCurrentPage(1);} } >
                     {cat}
               </li>
             ))}
           </ul>
-        </div>
+        </aside>
 
-        {/* Renderizado de productos filtrados */}
-<div className="products-grid">
-  {filteredProducts.length > 0 ? (
-    filteredProducts.map((prod) => {
-      // 1) imágenes: si viene del backend, spliteo el string.
-      // Si no hay imágenes, uso imgMap como fallback.
-      const backendImages = prod.images
-        ? prod.images.split("|")
-        : [];
-      const fallbackImages = imgMap[prod.idProduct] || [];
-      const images = backendImages.length > 0 ? backendImages : fallbackImages;
 
-      // 2) precio: si min y max son iguales, muestro un solo valor
-      const price =
-        prod.minPrice === prod.maxPrice
-          ? `$ ${prod.minPrice}`
-          : `$ ${prod.minPrice} - $ ${prod.maxPrice}`;
+        {/* Titulo dinámico */}
+      <main className="products-section">
+        <div className="section-title">
+            <span></span>
+              <h2>{selectedCategory === "all" ? "Nuestros Productos" : `${selectedCategory}`}</h2>
+            <span></span>
+          </div>
 
-      return (
-        <ProductCard
-          key={prod.idProduct}
-          product={prod}
-          images={images}
-          price={price}
-        />
-      );
-    })
-  ) : (
-    <p>No hay productos en esta categoría.</p>
-  )}
-</div>
-</div>
+          {/* Renderizado de productos filtrados */}
+          <div className="products-grid">
+            {currentProducts.length > 0 ? (
+              currentProducts.map((prod) => {
+
+                const backendImages = prod.images ? prod.images.split("|") : [];
+                const fallbackImages = imgMap[prod.idProduct] || [];
+                const images = backendImages.length > 0 ? backendImages : fallbackImages;
+                const price = prod.minPrice === prod.maxPrice ? `$ ${prod.minPrice}` : `$ ${prod.minPrice} - $ ${prod.maxPrice}`;
+
+                return (
+                  <div className="col" key={prod.idProduct}>
+                    <ProductCard key={prod.idProduct} product={prod} images={images} price={price}/>
+                  </div>
+                );
+              })  
+            ) : (
+              <p>No hay productos en esta categoría.</p>
+            )}
+          </div>
+
+        {/* Paginación */}
+
+        {totalPages > 1 && (
+          <div className="pagination">
+            {Array.from({ length: totalPages }, (_, index) => (
+                <button key={index + 1} className={currentPage === index + 1 ? "active" : ""} onClick={() => setCurrentPage(index + 1)}> {index + 1} </button>
+            ))}
+          </div>
+        )}
+        </main>
+      </div>
+
     </>)
 }
 

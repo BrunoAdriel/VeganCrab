@@ -57,6 +57,16 @@
     border-bottom: 1px solid #000;
 }
 
+/* Variant PRODUCT (siempre visible, distinto fondo) */
+.search-container.default .search-box,
+.search-container.product .search-box {
+    display: flex !important;
+    background: #f0f0f0; /* ejemplo para diferenciar */
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+
 @media (min-width: 601px) {
     .only-mobile { display: none !important;}
     .search-box { display: flex;}
@@ -66,13 +76,4 @@
     .search-box { display: none; flex: 1; }
     .search-box.open { display: flex; width: 100%; }
     .search-input { width: 100%; }
-}
-
-/* Variant PRODUCT (siempre visible, distinto fondo) */
-.search-container.default .search-box,
-.search-container.product .search-box {
-    display: flex !important;
-    background: #f0f0f0; /* ejemplo para diferenciar */
-    border-radius: 8px;
-    padding: 4px 8px;
 }
