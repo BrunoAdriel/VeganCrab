@@ -59,14 +59,15 @@ const ProductComponent = () =>{
     const totalPages = Math.ceil(filteredProducts.length / productPage);
     const startIndex = (currentPage - 1) * productPage;
     const currentProducts = filteredProducts.slice( startIndex, startIndex + productPage );
-console.log("Total productos filtrados:", filteredProducts.length);
-console.log("Mostrando en esta página:", currentProducts.length, "Página:", currentPage);
+
     return(<>
 
-        {/* Inyecto el buscador */}
-        <div className="container">
-                <SearchBar variant="product" onSearch={handleSearch} />
+        {/* Imagen estatica arriba de los productos */}
+        <div className="container-prod-img">
+          <img src={imgMap[6]} alt="Imagene"/>
         </div>
+
+
         {/* Filtros */}
         <div className="product-layout">
         <aside className="sidebar">
@@ -82,7 +83,6 @@ console.log("Mostrando en esta página:", currentProducts.length, "Página:", cu
           </ul>
         </aside>
 
-
         {/* Titulo dinámico */}
       <main className="products-section">
         <div className="section-title">
@@ -90,6 +90,11 @@ console.log("Mostrando en esta página:", currentProducts.length, "Página:", cu
               <h2>{selectedCategory === "all" ? "Nuestros Productos" : `${selectedCategory}`}</h2>
             <span></span>
           </div>
+
+        {/* Inyecto el buscador */}
+        <div className="container">
+                <SearchBar variant="product" onSearch={handleSearch} />
+        </div>
 
           {/* Renderizado de productos filtrados */}
           <div className="products-grid">

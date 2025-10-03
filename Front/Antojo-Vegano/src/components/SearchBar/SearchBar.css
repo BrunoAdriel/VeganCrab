@@ -57,16 +57,6 @@
     border-bottom: 1px solid #000;
 }
 
-/* Variant PRODUCT (siempre visible, distinto fondo) */
-.search-container.default .search-box,
-.search-container.product .search-box {
-    display: flex !important;
-    background: #f0f0f0; /* ejemplo para diferenciar */
-    border-radius: 8px;
-    padding: 4px 8px;
-}
-
-
 @media (min-width: 601px) {
     .only-mobile { display: none !important;}
     .search-box { display: flex;}
@@ -76,4 +66,38 @@
     .search-box { display: none; flex: 1; }
     .search-box.open { display: flex; width: 100%; }
     .search-input { width: 100%; }
+}
+
+
+/* Variant PRODUCT */
+/* Estilos específicos paraProductos */
+.search-container.product {
+    justify-content: flex-end;  
+    margin-bottom: 20px;        
+}
+
+.search-container.product .search-box {
+    width: 450px;               
+    max-width: 100%;            
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+.search-container.product .search-input {
+    width: 100%;                
+    font-size: 15px;            
+}
+
+
+@media (max-width: 600px) {
+    .search-container.product .search-box {
+        display: flex !important; 
+        width: 100%;
+        margin: 0 10px;              
+    }
+
+    .search-container.product .search-input {
+        font-size: 15px;     
+    }
 }

@@ -1,3 +1,16 @@
+/* Clases de la imagen */
+.container-prod-img{
+    display: flex;
+    width: 100%;
+    height: 70vh;
+}
+
+.container-prod-img img {
+    flex: 1;
+    object-fit: cover;
+}
+
+
 .product-layout {
     display: flex;
     gap: 20px;
@@ -12,7 +25,7 @@
     padding: 15px;
     border-radius: 8px;
     position: sticky;
-    top: 80px; /* se queda fijo al scrollear */
+    top: 24%; /* se queda fijo al scrollear */
     height: fit-content;
 }
 
