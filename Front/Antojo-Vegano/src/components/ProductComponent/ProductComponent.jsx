@@ -70,7 +70,7 @@ console.log("Mostrando en esta página:", currentProducts.length, "Página:", cu
         {/* Filtros */}
         <div className="product-layout">
         <aside className="sidebar">
-            <ul>
+            <ul className="filter-list">
                 <li className={selectedCategory === "all" ? "active" : ""} onClick={() => {setSelectedCategory("all") ; setCurrentPage(1);} }> 
                     Todos
                 </li>

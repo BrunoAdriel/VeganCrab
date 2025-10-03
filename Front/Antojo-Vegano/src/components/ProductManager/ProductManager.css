@@ -82,3 +82,7 @@
     background-color: rgb(242,178,142); 
     color: #fff;
 }
+
+@media (max-width: 600px) {
+    .section-title h2 {font-size: 1.7rem;};
+}
