@@ -3,6 +3,7 @@ import ProductCard from '../ProductCard/ProductCard.jsx';
 import './ProductManager.css';
 import { Link } from "react-router-dom";
 import Carrousel from '../Carrousel/Carrousel.jsx';
+import ShowProdComponent from '../ShowProdComponent/ShowProdComponent.jsx';
 
 
 const ProductManager = ()  => {
@@ -32,6 +33,18 @@ const ProductManager = ()  => {
     <div>
         <Carrousel/>
     </div>
+
+    {/* Importo los productos de muestra ids:4-5*/}
+
+    <div>
+    {listProd.slice(3,5).map((prod)=>{
+        const images = imgMap[prod.idProduct] || [];
+        return(
+                <ShowProdComponent key={prod.idProduct} producto={prod} images={images}/>
+        )
+    })}
+    </div>
+
 
     {/* Titulo con estilo */}
         <div className="section-title">
