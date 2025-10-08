@@ -29,10 +29,10 @@ const CarrouselProducts = () =>{
     return (
         <div className="container container-carrousel">
             <div className=" custom-carousel-container">
+                
                 <button className="custom-carousel-btn prev" onClick={handlePrev}>
                     ❮
                 </button>
-
             <div className="custom-carousel-wrapper">
                 <div
                 className="container custom-carousel-track"
