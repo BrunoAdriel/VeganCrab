@@ -1,0 +1,113 @@
+/* Footer General */
+.container-footer{
+    width: 100vw;
+    height: auto;
+    background-color: #e3d1bd;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 0;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Contenedor principal */
+
+.footer-content{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 85%;
+    gap: 10px;
+    padding-top: 30px;
+}
+
+/* Columnas */
+
+.container-navegation,
+.container-information,
+.container-media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+    color: #2a2a2a;
+}
+
+/* Logo dinamico */
+.title-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px
+}
+
+.title-footer img{
+    width: 60px;
+    height: 60px;
+    border-radius: 15%;
+    object-fit: cover;
+}
+
+.title-footer span{
+    font-weight: bold;
+    color: #a36d35;
+    font-size: 1.3rem;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Navegacion */
+.container-navegation a {
+    color: #333;
+    text-decoration: none;
+    margin: 3px 0;
+    transition: color 0.3s ease;
+}
+.container-navegation a:hover {
+    color: #cfa97e;
+}
+
+/* Información */
+.container-information p {
+    margin: 4px 0;
+    font-size: 0.95rem;
+}
+
+/* Redes */
+.container-media p {
+    font-size: 0.95rem;
+    color: #5a4631;
+    margin-bottom: 10px;
+}
+
+.social-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.container-media svg {
+    margin: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.container-media svg:hover {
+    transform: scale(1.15);
+    color: #cfa97e;
+}
+
+/* Por cada footer content crea una liena divisoria */
+.footer-content > *:not(:last-child) {
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+    padding-right: 40px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    .footer-content { flex-direction: column; align-items: stretch; gap: 20px; }
+    .footer-content > *:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(0, 0, 0, 0.2); padding-right: 0; padding-bottom: 20px; }
+}
