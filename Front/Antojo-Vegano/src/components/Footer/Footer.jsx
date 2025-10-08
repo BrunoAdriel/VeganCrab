@@ -17,7 +17,7 @@ const Footer = () =>{
                     </div>
                     <a className=""  href="#">Sobre Nosotros</a>
                     <a className="" href="#">Contacto</a>
-                    <a className="" href="#"  >Nuestros Productos</a>
+                    <a className="" href="/productos">Nuestros Productos</a>
                 </section>
 
             {/* Informacion personal */}

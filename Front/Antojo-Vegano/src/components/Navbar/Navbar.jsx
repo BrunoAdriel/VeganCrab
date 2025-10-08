@@ -40,7 +40,7 @@ return (<>
             <a className="nav-link active" href="#">Contacto</a>
             </li>
             <li className="nav-item dropdown">
-            <a className="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+            <a className="nav-link active dropdown-toggle" href="/productos" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
             <ul className="dropdown-menu">
                 {/* Agregar Categorias */}
                 { categories.length > 0  ?(

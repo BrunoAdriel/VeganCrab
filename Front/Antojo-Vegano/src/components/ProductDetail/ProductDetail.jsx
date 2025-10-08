@@ -5,6 +5,7 @@ import medialuna1 from '../../../public/Products/Hojaldradas/CrossaintDeChocolat
 import medialuna2 from '../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg';
 import CarrouselProducts from "../CarrouselProducts/CarrouselProducts.jsx";
 import { useParams } from "react-router-dom";
+import BtnBack from "../BtnBack/BtnBack.jsx";
 
 
 const ProductDetail = () =>{
@@ -52,6 +53,10 @@ const ProductDetail = () =>{
         if(!product)return <p>Cargando...</p>;
 
     return(<>
+
+    {/* Btn para volver */}
+    <BtnBack/>
+
     {/* Card Principal */}
     <div className="product-detail">
         <div className="image-section">

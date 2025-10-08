@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import './ProductComponent.css';
 import ProductCard from "../ProductCard/ProductCard.jsx";
 import SearchBar from "../SearchBar/SearcBar";
+import BtnBack from "../BtnBack/BtnBack.jsx";
 
 const ProductComponent = () =>{
     const [products, setProducts] = useState([]);
@@ -67,6 +68,8 @@ const ProductComponent = () =>{
           <img src={imgMap[6]} alt="Imagene"/>
         </div>
 
+      {/* Btn Volver */}
+        <BtnBack/>
 
         {/* Filtros */}
         <div className="product-layout">
