@@ -23,6 +23,29 @@
     border-radius: 2px;
 }
 
+/* divisor carrousel showProd */
+.section-divider {
+    width: 98%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    gap: 12px;
+    color: #a36d35;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.section-divider .line {
+    flex: 1;
+    height: 4px;
+    background: #cfa97e;
+    opacity: 0.8;
+    border-radius: 2px;
+}
+
 
 /* Bloque de cards recortadas */
 .see-more-block {

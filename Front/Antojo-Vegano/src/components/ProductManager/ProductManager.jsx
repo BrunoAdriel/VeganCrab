@@ -34,8 +34,17 @@ const ProductManager = ()  => {
         <Carrousel/>
     </div>
 
-    {/* Importo los productos de muestra ids:4-5*/}
+    {/* Linea divisioria */}
+    <div className="section-divider">
+        <span className="line"></span>
+        <p>✨ Del horno a tu mesa ✨</p>
+        <span className="line"></span>
+    </div>
 
+
+
+
+    {/* Importo los productos de muestra ids:4-5*/}
     <div>
     {listProd.slice(3,5).map((prod)=>{
         const images = imgMap[prod.idProduct] || [];

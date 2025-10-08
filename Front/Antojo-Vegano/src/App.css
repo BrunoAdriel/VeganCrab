@@ -1,0 +1,9 @@
+body {
+  background-image: url('../public/Principal/Fondo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-position: center;
+  background-attachment: fixed; 
+  background-color: #fffaf4; 
+  font-family: 'Poppins', sans-serif; 
+}

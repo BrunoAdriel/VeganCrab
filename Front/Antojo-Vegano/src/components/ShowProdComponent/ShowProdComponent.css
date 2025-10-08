@@ -52,7 +52,7 @@
 
 /* MOBILE */
 @media (max-width: 600px) {
-    .container-show-prod { flex-direction: column; height: auto;}
+    .container-show-prod { flex-direction:column !important; height: auto;}
 
     .image-section { width: 100%; height: 50vh;}
 

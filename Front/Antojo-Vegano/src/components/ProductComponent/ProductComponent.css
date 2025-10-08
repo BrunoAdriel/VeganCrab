@@ -1,13 +1,19 @@
 /* Clases de la imagen */
 .container-prod-img{
-    display: flex;
     width: 100%;
     height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .container-prod-img img {
-    flex: 1;
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;          
+    object-position: center; 
+    max-width: none;
 }
 
 
