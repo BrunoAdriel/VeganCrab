@@ -1,15 +1,22 @@
-.custom-carousel-container {
+.container-carrousel{
     position: relative;
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width:100%;
     margin: 40px auto;
+}
+
+.custom-carousel-container {
+    width: 100%;
     overflow: hidden;
 }
 
 
-
 .custom-carousel-wrapper {
     overflow: hidden;
-    width: 100%; /* ocupa todo el ancho del container */
+    width: 100%;
 }
 
 .custom-carousel-track {
@@ -17,20 +24,38 @@
     transition: transform 0.5s ease-in-out;
 }
 
+/* Cada Card ocupa 1/5 del espacio */
 .custom-carousel-item {
-    flex: 0 0 calc(100% / 5); /* 5 items visibles */
+    flex: 0 0 calc(100% / 5); 
     box-sizing: border-box;
     padding: 0 10px; /* espacio entre cards */
 }
 
 .custom-carousel-item .card {
     height: 100%;
+    max-width: 260px;
+    margin: auto;
+    height: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
-.custom-carousel-item img {
+.custom-carousel-item .card-img-top {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Centra el contenido */
+.custom-carousel-item .card-body {
+
+    padding: 10px;
+}
+
+.custom-carousel-item .button-card {
+    text-align: center;
+    padding: 7px;
 }
 
 /* Botones */
@@ -38,24 +63,45 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 5;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: #cfa97e;
     color: white;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 10px 14px;
     border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 5;
 }
 
+/* Posicionamiento fuera del carrusel */
 .custom-carousel-btn.prev {
-    left: 10px;
+    left: -30px;
 }
 
 .custom-carousel-btn.next {
-    right: 10px;
+    right: -30px;
 }
 
 .custom-carousel-btn:hover {
     background: rgba(69, 69, 69, 0.898);
+}
+
+
+@media(max-width:600px){
+    .custom-carousel-btn.prev { left: 3px; }
+    .custom-carousel-btn.next { right: 3px; }
+    .custom-carousel-item { flex: 0 0 calc(20% / 1); }
+    .custom-carousel-item .card {
+    max-width: 250px;
+  }
+
+  .custom-carousel-item .card-img-top {
+    height: 150px;
+  }
+
+  /* Evita desbordes por padding interno del carrusel */
+  .custom-carousel-track {
+    gap: 10px;
+  }
 }
