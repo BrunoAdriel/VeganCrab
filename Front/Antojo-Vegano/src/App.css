@@ -7,3 +7,7 @@ body {
     background-color: #fffaf4; 
     font-family: 'Poppins', sans-serif; 
 }
+
+html, body {
+  overflow-x: hidden;  /* elimina cualquier scroll horizontal global */
+}

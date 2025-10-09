@@ -1,0 +1,10 @@
+/* Contenedor principal */
+.container-cart{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end ;
+    z-index: 10;
+    width: 30%;
+    height: 100vh;
+    background-color: grey;
+}

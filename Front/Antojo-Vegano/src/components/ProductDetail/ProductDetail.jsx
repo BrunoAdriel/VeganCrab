@@ -20,8 +20,43 @@ const ProductDetail = () =>{
             alert("Por favor, ingresa una cantidad valida");
             return;
         }console.log(`Agregaste al carrito: ${quantity} unidades de  ${product.prodName}`);
-    };
 
+
+    /* Guardar los productos en el Local */
+    const newItem = {
+        id: product.idProduct,
+        name: product.prodName,
+        price: product.unit_price,
+        image: mainImg || "/placeholder.jpg",
+        size: product.size || null,
+        quantity: parseInt(quantity)
+    }
+
+
+    // Obtener el carrito existente o crear uno nuevo
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+
+    // Verificar si ya existe el producto en el carrito
+    const existingIndex = cart.findIndex(item => item.id === newItem.id && item.size === newItem.size);
+
+
+    // Si ya existe, sumamos la cantidad sino lo agrega
+    if (existingIndex >= 0) {
+        cart[existingIndex].quantity += newItem.quantity;
+    } else {
+        cart.push(newItem);
+    }
+
+
+    // Guardamos en localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+
+    // Opcional: feedback visual
+    alert(`${newItem.quantity} ${newItem.name} agregado(s) al carrito`);
+    console.log("carrito:", cart)
+    };
 
     /* Handle fade img */
     const handleImage = (img)=>{
