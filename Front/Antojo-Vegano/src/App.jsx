@@ -6,6 +6,7 @@ import ProductManager from './components/ProductManager/ProductManager.jsx';
 import ProductDetail from './components/ProductDetail/ProductDetail.jsx';
 import ProductComponent from './components/ProductComponent/ProductComponent.jsx';
 import Footer from './components/Footer/Footer.jsx';
+import Cart from './components/Cart/Cart.jsx';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     <>
     <Router>
       <NavigationBar></NavigationBar>
+      <Cart></Cart>
       <Routes>
         <Route path='/' element={<ProductManager/>} />
         <Route path='/products/:id' element={<ProductDetail/>} />

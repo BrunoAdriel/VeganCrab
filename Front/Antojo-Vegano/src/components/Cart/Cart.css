@@ -1,5 +1,5 @@
 /* Contenedor principal */
-.container-cart{
+/* .container-cart{
     display: flex;
     flex-direction: column;
     justify-content: flex-end ;
@@ -7,4 +7,46 @@
     width: 30%;
     height: 100vh;
     background-color: grey;
+} */
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+}
+
+.container-cart {
+  background: #fff;
+  width: 400px;
+  height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  animation: slideIn 0.4s forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  float: right;
+}
+
+.card-cart {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.d-none {
+  display: none !important;
 }
