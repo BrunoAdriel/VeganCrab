@@ -1,0 +1,9 @@
+Numero arriba del svg
+
+
+const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+<div className="cart-icon-container">
+  <svg ...>...</svg>
+  {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+</div>

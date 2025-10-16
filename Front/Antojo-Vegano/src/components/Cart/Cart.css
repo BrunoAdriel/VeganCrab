@@ -1,14 +1,4 @@
 /* Contenedor principal */
-/* .container-cart{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end ;
-    z-index: 10;
-    width: 30%;
-    height: 100vh;
-    background-color: grey;
-} */
-
 .cart-overlay {
   position: fixed;
   inset: 0;
@@ -18,20 +8,23 @@
   z-index: 1000;
 }
 
+/* Contenedor de las Cards */
 .container-cart {
   background: #fff;
   width: 400px;
   height: 100vh;
   padding: 20px;
   overflow-y: auto;
-  animation: slideIn 0.4s forwards;
+  animation: slideIn 0.6s forwards;
 }
 
+/* Movimiento de entrada */
 @keyframes slideIn {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+  from { transform: translateX(100%);}
+  to { transform: translateX(0);}
 }
 
+/* Estilos Btn de cierre */
 .close-btn {
   background: none;
   border: none;
@@ -39,14 +32,31 @@
   cursor: pointer;
   float: right;
 }
-
+/* Estilos Card */
 .card-cart {
   display: flex;
   gap: 10px;
   border-bottom: 1px solid #ccc;
   padding: 10px 0;
 }
+/* Estilo Eliminat item */
+.remove-item{
+  border: none; 
+  background: none;
+  cursor: pointer;
+  float: right;
+}
+/* Contenedor de los buttons */
+.container-buttons{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
 
-.d-none {
-  display: none !important;
+/* MEDIA */
+@media(max-width:600px){
+  .container-cart{width: 90vw; }
+  .card-cart{flex-direction: column; border-bottom: 1px solid #ccc;} 
+  .cart-prods { display: flex; flex-direction: column; align-items: center; width: 100%;}
+  .container-buttons{justify-content: space-between; gap: 10px;}
 }

@@ -52,11 +52,15 @@ const ProductDetail = () =>{
     // Guardamos en localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
 
+    /* Emito el evento */
+    window.dispatchEvent(new Event("cartUpdated"));
+
+
 
     // Opcional: feedback visual
-    alert(`${newItem.quantity} ${newItem.name} agregado(s) al carrito`);
-    console.log("carrito:", cart)
-    };
+    alert(`${newItem.quantity} ${newItem.name} agregado(s) al carrito`); console.log("carrito:", cart)
+
+};
 
     /* Handle fade img */
     const handleImage = (img)=>{

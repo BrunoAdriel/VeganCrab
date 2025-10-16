@@ -2,34 +2,56 @@ import React,{useState, useEffect} from 'react';
 import './Cart.css';
 
 const Cart = () => {
-
     /* Recupero  los datos guardados */
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+    const [visible, setVisible] = useState(false);
+
+    /* Funcion para eliminar por (ID) */
+    const removeItem = (id) => {
+        const removedCart = cart.filter((prod) => prod.id !== id);
+        setCart(removedCart);
+        localStorage.setItem("cart", JSON.stringify(removedCart));
+
+        // Actualizo el evento
+        window.dispatchEvent(new Event("cartUpdated"));
+    };
+
 
     /* Escucha del btn de cierre el modal */
     useEffect(() => {
-        const closeBtn = document.querySelector(".close-btn");
-        const overlay = document.querySelector(".cart-overlay");
+        /* Funcion para actualizar el estado */
+        const updateCart = () =>{
+            const update = JSON.parse(localStorage.getItem("cart")) || [];
+            setCart(update);
+        }
 
-        const closeCart = () => {
-            overlay.classList.add("d-none");
-        };
-
-        if (closeBtn) closeBtn.addEventListener("click", closeCart);
-        if (overlay) overlay.addEventListener("click", closeCart);
+        /* Evento de escucha, nuevo item */
+        window.addEventListener("cartUpdated", updateCart)
+        /* Evento de escucha, en otros navegadores/pestañas */
+        window.addEventListener("storage", updateCart);
 
         return () => {
-            if (closeBtn) closeBtn.removeEventListener("click", closeCart);
-            if (overlay) overlay.removeEventListener("click", closeCart);
+            window.removeEventListener("cartUpdated", updateCart);
+            window.removeEventListener("storage", updateCart);
         };
     }, []);
 
-    return (
-        <div className="cart-overlay d-none" onClick={(e) => e.target.classList.contains("cart-overlay") && e.target.classList.add("d-none")}>
-        <div className="container-cart">
-            <button className="close-btn">✖</button>
-            <h3>Tu Carrito</h3>
+    /* Mostrar / Ocultar desde BTn o overlay */
+    useEffect(() => {
+        const toggleCart = () => setVisible((prev) => !prev);
+        window.addEventListener("toggleCart", toggleCart);
 
+    return () => window.removeEventListener("toggleCart", toggleCart);
+    }, []);
+    if (!visible) return null;
+
+
+    return (
+        <div className="cart-overlay" onClick={(e) => e.target.classList.contains("cart-overlay") && setVisible(false)}>
+        <div className="container-cart">
+            <button className="close-btn" onClick={() => setVisible(false)}>◀️</button>
+            <h3>Tu Carrito</h3>
+            {/* Inyecto los productos guardados en el Storage */}
             <section className="cart-prods">
             {cart.length === 0 ? (
                 <p>No hay productos en el carrito.</p>
@@ -44,16 +66,17 @@ const Cart = () => {
                         <p>{prod.size || ""}</p>
                         <p>{prod.quantity} X ${prod.price}</p>
                         <p>Total: ${total}</p>
+                        <button className='remove-item' onClick={() => removeItem(prod.id)}>✖</button>
                     </div>
                     </div>
                 );
                 })
             )}
             </section>
-
             <div className="container-buttons">
-            <button>Ver Carrito</button>
-            <button>Finalizar Compra</button>
+            <button className='btn-add'>Ver Carrito</button>
+            <button className='btn-add'>Finalizar Compra</button>
+{/*             <button className='btn-see-more'>Ver Carrito</button> */}
             </div>
         </div>
         </div>
