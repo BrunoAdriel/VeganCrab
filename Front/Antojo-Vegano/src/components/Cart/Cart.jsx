@@ -73,6 +73,9 @@ const Cart = () => {
                 })
             )}
             </section>
+            <div className="cart-total">
+                <h4>Total a pagar: ${cart.reduce((acc, prod) => acc + prod.price * prod.quantity, 0)}</h4>
+            </div>
             <div className="container-buttons">
             <button className='btn-add'>Ver Carrito</button>
             <button className='btn-add'>Finalizar Compra</button>

@@ -71,7 +71,7 @@ const ProductDetail = () =>{
         }, 200)
     }
 
-/*     const { id }= useParams();   
+    const { id }= useParams();   
 
     
     useEffect(()=>{fetch(`http://localhost:3000/products/${id}`)
@@ -82,15 +82,15 @@ const ProductDetail = () =>{
 
 
     if(!product)return <p>Cargando...</p>;
- */
 
-    useEffect(()=>{fetch("http://localhost:3000/products/2") 
+
+/*     useEffect(()=>{fetch("http://localhost:3000/products/2") 
         .then((res)=> res.json()) 
         .then((data)=> {console.log("Datos sobre Productos:", data.idProduct); setProduct(data.idProduct[0]); }) 
         .catch((error) => console.error("Error en el Fetch de Productos", error)); },[])
     
         if(!product)return <p>Cargando...</p>;
-
+ */
     return(<>
 
     {/* Btn para volver */}
