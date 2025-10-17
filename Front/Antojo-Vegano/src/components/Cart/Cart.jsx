@@ -1,10 +1,12 @@
 import React,{useState, useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 import './Cart.css';
 
 const Cart = () => {
     /* Recupero  los datos guardados */
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
     const [visible, setVisible] = useState(false);
+    const navigate = useNavigate(); /* Constante para marcar un punto de navegacion */
 
     /* Funcion para eliminar por (ID) */
     const removeItem = (id) => {
@@ -14,6 +16,13 @@ const Cart = () => {
 
         // Actualizo el evento
         window.dispatchEvent(new Event("cartUpdated"));
+    };
+
+    /* Funcion para ir a "Ver Carrito" */
+    const handleGoToCart = () => {
+        /* Indico la ruta  */
+        setVisible(false);
+        navigate("/cart", { state: { cart } });
     };
 
 
@@ -77,7 +86,7 @@ const Cart = () => {
                 <h4>Total a pagar: ${cart.reduce((acc, prod) => acc + prod.price * prod.quantity, 0)}</h4>
             </div>
             <div className="container-buttons">
-            <button className='btn-add'>Ver Carrito</button>
+            <button className='btn-add' onClick={ handleGoToCart} >Ver Carrito</button>
             <button className='btn-add'>Finalizar Compra</button>
 {/*             <button className='btn-see-more'>Ver Carrito</button> */}
             </div>

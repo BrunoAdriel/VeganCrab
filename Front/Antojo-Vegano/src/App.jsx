@@ -7,6 +7,7 @@ import ProductDetail from './components/ProductDetail/ProductDetail.jsx';
 import ProductComponent from './components/ProductComponent/ProductComponent.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import Cart from './components/Cart/Cart.jsx';
+import CartDetail from './components/CartDetail/CartDetail.jsx';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<ProductManager/>} />
         <Route path='/products/:id' element={<ProductDetail/>} />
         <Route path='/productos' element={<ProductComponent/>} />
+        <Route path="/cart" element={<CartDetail />} />
       </Routes>
       <Footer></Footer>
     </Router>
