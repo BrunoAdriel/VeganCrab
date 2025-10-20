@@ -1,22 +1,12 @@
 import React,{useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
+import {CartManager} from "../HookCartManager/CartManager.jsx";
 import './Cart.css';
 
 const Cart = () => {
-    /* Recupero  los datos guardados */
-    const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+    const {cart, removeItem } = CartManager(); /* Acceso a las funciones */
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate(); /* Constante para marcar un punto de navegacion */
-
-    /* Funcion para eliminar por (ID) */
-    const removeItem = (id) => {
-        const removedCart = cart.filter((prod) => prod.id !== id);
-        setCart(removedCart);
-        localStorage.setItem("cart", JSON.stringify(removedCart));
-
-        // Actualizo el evento
-        window.dispatchEvent(new Event("cartUpdated"));
-    };
 
     /* Funcion para ir a "Ver Carrito" */
     const handleGoToCart = () => {
@@ -24,26 +14,6 @@ const Cart = () => {
         setVisible(false);
         navigate("/cart", { state: { cart } });
     };
-
-
-    /* Escucha del btn de cierre el modal */
-    useEffect(() => {
-        /* Funcion para actualizar el estado */
-        const updateCart = () =>{
-            const update = JSON.parse(localStorage.getItem("cart")) || [];
-            setCart(update);
-        }
-
-        /* Evento de escucha, nuevo item */
-        window.addEventListener("cartUpdated", updateCart)
-        /* Evento de escucha, en otros navegadores/pestañas */
-        window.addEventListener("storage", updateCart);
-
-        return () => {
-            window.removeEventListener("cartUpdated", updateCart);
-            window.removeEventListener("storage", updateCart);
-        };
-    }, []);
 
     /* Mostrar / Ocultar desde BTn o overlay */
     useEffect(() => {
