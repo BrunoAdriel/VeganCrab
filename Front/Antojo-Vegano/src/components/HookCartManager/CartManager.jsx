@@ -24,7 +24,17 @@ export const CartManager = () =>{
     }
     updateStorage(updatedCart);
     };
-    
+
+    /* Precio Envio */
+    const envio = 4500;
+
+    /* Precio subTotal  */
+    const subTotal = cart.reduce((acc, p) => acc + p.price * p.quantity, 0);
+
+    /* Precio Total */
+    const total = subTotal + envio;
+
+
     /* Eliminar un producto */
     const removeItem = (id) => {
         const updatedCart = cart.filter((p) => p.id !== id);
@@ -47,6 +57,6 @@ export const CartManager = () =>{
     };
     }, []);
 
-    return {cart, addItem, removeItem, clearCart};
+    return {cart, addItem, removeItem, clearCart, envio, total, subTotal};
 
 }

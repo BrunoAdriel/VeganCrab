@@ -1,3 +1,10 @@
+/* Fija el footer abajo de las pagina */
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 /* Footer General */
 .container-footer{
     width: 100vw;
