@@ -7,19 +7,13 @@ import { CartManager } from "../HookCartManager/CartManager";
 
 
 const NavigationBar = () => {
-    const [categories, setCategories] = useState([]);
     const {totalItems}= CartManager() /* Acceso a las funciones */
+    const [isScrolled, setIsScrolled] = useState(false);
     
     const handleSearch = (query) => {
         console.log("Buscaste desde Nav:", query);
     };
 
-
-    // Fetch para obtener categorias
-    useEffect(() => { fetch("http://localhost:3000/products/categorys")
-        .then((res) => res.json())  
-        .then((data) => { console.log("Backend nav:", data.categorys); setCategories(data.categorys); })
-        .catch((error)=> console.error("Error fetch categories", error)); }, []);
 
 
 return (<>
@@ -28,7 +22,7 @@ return (<>
     <div className="navbar-top">
         <div className="d-flex align-items-center">
             <img src={logo} alt="Imagen Logo Antojo Vegano" className="logoNav" />
-            <a className="TitleLogo">Antojo Vegano</a>
+            <a href="/" className="TitleLogo">Antojo Vegano</a>
         </div>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
             <span className="navbar-toggler-icon"></span>
@@ -45,17 +39,7 @@ return (<>
                     <a className="nav-link active" href="#">Contacto</a>
                     </li>
                     <li className="nav-item dropdown">
-                    <a className="nav-link active dropdown-toggle" href="/productos" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
-                    <ul className="dropdown-menu">
-                        {/* Agregar Categorias */}
-                        { categories.length > 0  ?(
-                        categories.map((cat) => (<li key={cat.idCategory}>
-                                                    <a className="dropdown-item" href={`/products/${cat.idCategory}`}> {cat.categoryName} </a>
-                                                </li>)
-                                        )) : (
-                            <li><span className="dropdown-item">Cargando...</span></li>
-                        )}
-                    </ul>
+                    <a className="nav-link active" href="/productos" role="button"  aria-expanded="false">Productos</a>
                     </li>
                 </ul>
             </div>

@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #d1c1b0;
 }
 
 /* Contenedor principal dividido en 3 */
@@ -23,7 +22,7 @@
   height: 60px;
   border-radius: 10%;
   object-fit: cover;
-  margin-right: 10px;
+  margin: 0 10px;
 }
 
 .TitleLogo {
@@ -34,13 +33,7 @@
   text-decoration: none;
 }
 
-/* Agrupa logo + texto */
-.container-fluid > img,
-.container-fluid > .TitleLogo {
-  vertical-align: middle;
-}
-
-/* ----- CENTRO: CONTENIDO / LINKS ----- */
+/* CONTENIDO / LINKS */
 .center-item {
   flex: 1;
   display: flex;
@@ -54,15 +47,12 @@
   transition: color 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover {
-  color: #cfa97e;
-}
-
-/* ----- DERECHA: ICONOS ----- */
+/* ICONOS  */
 .containerIcons {
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-right: 15px;
 }
 
 .containerIcons svg {
@@ -93,7 +83,7 @@
 }
 
 /* ----- MOBILE ----- */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .container-fluid {
     flex-direction: column;
     align-items: stretch;
@@ -108,32 +98,36 @@
     width: 100%;
     padding: 8px 15px;
   }
-
-  .navbar-top img {
-    width: 50px;
-    height: 50px;
+  .navbar-top .left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .navbar-top .TitleLogo {
     font-size: 1.1rem;
   }
 
-  /* Oculta los íconos de la parte derecha del nav principal */
+  /* Centrar íconos abajo */
   .containerIcons {
+    display: flex;
     justify-content: center;
-    margin-top: 8px;
-    padding-bottom: 10px;
-    border-top: 1px solid #ddd;
+    align-items: center;
+    padding-bottom: 8px;
+    width: 100%;
   }
 
-  /* Asegura que los svg estén centrados */
   .containerIcons svg {
     width: 30px;
     height: 30px;
   }
 
-  /* Centrar el buscador en mobile */
-  .containerIcons .search-bar {
-    width: 80%;
+  .navbar-nav {
+    text-align: center;
+  }
+
+  /* Agrega un poco de margen a "Sobre Nosotros" */
+  .navbar-nav .nav-item:first-child .nav-link {
+    margin-left: 10px;
   }
 }
