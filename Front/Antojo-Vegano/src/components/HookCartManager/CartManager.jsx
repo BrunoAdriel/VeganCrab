@@ -34,6 +34,8 @@ export const CartManager = () =>{
     /* Precio Total */
     const total = subTotal + envio;
 
+    /* Items del carrito */
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
     /* Eliminar un producto */
     const removeItem = (id) => {
@@ -57,6 +59,6 @@ export const CartManager = () =>{
     };
     }, []);
 
-    return {cart, addItem, removeItem, clearCart, envio, total, subTotal};
+    return {cart, addItem, removeItem, clearCart, envio, total, subTotal, totalItems};
 
 }

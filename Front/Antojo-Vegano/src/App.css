@@ -8,6 +8,21 @@ body {
     font-family: 'Poppins', sans-serif; 
 }
 
-html, body {
+html, body, #root {
   overflow-x: hidden;  /* elimina cualquier scroll horizontal global */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* asegura que la pantalla siempre ocupe todo el alto */
+}
+
+
+main {
+  flex: 1; /* empuja el footer hacia abajo */
 }

@@ -14,14 +14,16 @@ function App() {
   return (
     <>
     <Router>
-      <NavigationBar></NavigationBar>
+      <NavigationBar/>
       <Cart></Cart>
-      <Routes>
-        <Route path='/' element={<ProductManager/>} />
-        <Route path='/products/:id' element={<ProductDetail/>} />
-        <Route path='/productos' element={<ProductComponent/>} />
-        <Route path="/cart" element={<CartDetail />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path='/' element={<ProductManager/>} />
+          <Route path='/products/:id' element={<ProductDetail/>} />
+          <Route path='/productos' element={<ProductComponent/>} />
+          <Route path="/cart" element={<CartDetail />} />
+        </Routes>
+      </main>
       <Footer></Footer>
     </Router>
     </>

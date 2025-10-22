@@ -38,7 +38,7 @@ const CartDetail = () =>{
                     </table>
                 </div>
           {/* Sección de totales */}
-            <div className="d-flex flex-column align-items-end mt-3">
+            <div className="d-flex flex-column align-items-end my-3">
                 <p className="mb-1">Subtotal : ${subTotal}</p>
                 <p className="mb-1">Envío :  ${envio}</p>
                 <h5>Total a pagar: <strong>${total.toLocaleString()}</strong></h5>

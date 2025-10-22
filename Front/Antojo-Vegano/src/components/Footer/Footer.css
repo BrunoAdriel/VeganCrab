@@ -1,7 +1,6 @@
 /* Fija el footer abajo de las pagina */
 footer{
-    position: absolute;
-    bottom: 0;
+    position: static;
     width: 100%;
 }
 

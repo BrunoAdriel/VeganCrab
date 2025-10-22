@@ -1,24 +1,139 @@
-.navbar{
-    background-color: rgb(242,178,142);
+/* ----- ESTRUCTURA GENERAL ----- */
+.navbar {
+  width: 100%;
+  background-color: #f8f5f2;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #d1c1b0;
 }
 
-.logoNav{
-    width:60px;
-    height: 60px;
-    border-radius: 20%;
+/* Contenedor principal dividido en 3 */
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.TitleLogo{
-    margin-left:2%;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
+/* ----- IZQUIERDA: LOGO + TÍTULO ----- */
+.logoNav {
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
+  object-fit: cover;
+  margin-right: 10px;
 }
 
+.TitleLogo {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #a36d35;
+  text-decoration: none;
+}
+
+/* Agrupa logo + texto */
+.container-fluid > img,
+.container-fluid > .TitleLogo {
+  vertical-align: middle;
+}
+
+/* ----- CENTRO: CONTENIDO / LINKS ----- */
 .center-item {
-    flex-grow: 1;       /* ocupa todo el espacio disponible */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-nav .nav-link {
+  color: #333;
+  font-weight: 500;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #cfa97e;
+}
+
+/* ----- DERECHA: ICONOS ----- */
+.containerIcons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.containerIcons svg {
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.containerIcons svg:hover {
+  transform: scale(1.1);
+  color: #cfa97e;
+}
+
+/* Carrito con contador */
+.cart-icon-container {
+  position: relative;
+}
+
+.cart-icon-container::after {
+  content: attr(data-count);
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: #cfa97e;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* ----- MOBILE ----- */
+@media (max-width: 768px) {
+  .container-fluid {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  /* Parte superior: logo + toggle */
+  .navbar-top {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 8px 15px;
+  }
+
+  .navbar-top img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .navbar-top .TitleLogo {
+    font-size: 1.1rem;
+  }
+
+  /* Oculta los íconos de la parte derecha del nav principal */
+  .containerIcons {
     justify-content: center;
+    margin-top: 8px;
+    padding-bottom: 10px;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Asegura que los svg estén centrados */
+  .containerIcons svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Centrar el buscador en mobile */
+  .containerIcons .search-bar {
+    width: 80%;
+  }
 }
