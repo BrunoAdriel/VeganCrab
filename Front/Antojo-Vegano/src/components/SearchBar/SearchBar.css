@@ -29,6 +29,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: #000;
 }
 
 /* Aseguramos que los svg ocupen el espacio justo */

@@ -10,6 +10,13 @@ const NavigationBar = () => {
     const {totalItems}= CartManager() /* Acceso a las funciones */
     const [isScrolled, setIsScrolled] = useState(false);
     
+    useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 50);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+
     const handleSearch = (query) => {
         console.log("Buscaste desde Nav:", query);
     };
@@ -17,35 +24,32 @@ const NavigationBar = () => {
 
 
 return (<>
-<nav className="navbar navbar-expand-lg" >
-    {/* Logo y Navegacio */}
-    <div className="navbar-top">
-        <div className="d-flex align-items-center">
-            <img src={logo} alt="Imagen Logo Antojo Vegano" className="logoNav" />
-            <a href="/" className="TitleLogo">Antojo Vegano</a>
-        </div>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-            <span className="navbar-toggler-icon"></span>
-        </button>
-    </div>
-         {/* --- Contenido central --- */}
-        <div className="center-item">
-            <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <ul className="navbar-nav d-flex align-items-center ">
-                    <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">Sobre Nosotros</a>
-                    </li>
-                    <li className="nav-item">
-                    <a className="nav-link active" href="#">Contacto</a>
-                    </li>
-                    <li className="nav-item dropdown">
-                    <a className="nav-link active" href="/productos" role="button"  aria-expanded="false">Productos</a>
-                    </li>
-                </ul>
+        <nav className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}>
+            <div className="container-fluid">
+
+                {/* Contenedor del titulo y logo */}
+                    <div className="left-section">
+                        <img src={logo} alt="Logo" className="logoNav" />
+                        <a className="TitleLogo">Antojo Vegano</a>
+                    </div>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+
+                {/* Contenedor de info */}
+                <div className="collapse navbar-collapse" id="navbarSupportedContent" >
+                    <ul className="navbar-nav">
+                        <li className="nav-item"><a className="nav-link active" href="#">Sobre Nosotros</a></li>
+                        <li className="nav-item"><a className="nav-link active" href="#">Contacto</a></li>
+                        <li className="nav-item"><a className="nav-link active" href="/productos">Productos</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+
+            {/* Contenedor de Imputs */}
         {/* Imput Busquedas */}
-        <div className="d-flex align-items-center gap-3 containerIcons">
+        <div className="containerIcons">
             {/* Inyecto el buscador generico */}
             <SearchBar variant="nav" onSearch={handleSearch} />
             
@@ -57,14 +61,15 @@ return (<>
                 <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
             </svg>
             {/* Carrito */}
-            <div className="cart-icon-container">
+                <div className="cart-icon-container" data-count={totalItems > 0 ? totalItems : ""}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-cart-check" viewBox="0 0 16 16" 
-                    onClick={() => { window.dispatchEvent(new Event("toggleCart")) }} style={{ cursor: "pointer" }}>
+                onClick={() => window.dispatchEvent(new Event("toggleCart"))} style={{ cursor: "pointer" }}>
                     <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
                     <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
                 </svg>
-            </div>
+                </div>
         </div>
+
     </nav>
 </>);
 };

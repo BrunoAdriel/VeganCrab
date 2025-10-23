@@ -1,14 +1,25 @@
-/* ----- ESTRUCTURA GENERAL ----- */
+/* Contenedor Principal */
+nav.navbar {
+  background-color: rgba(0, 0, 0, 0.03); /* transparente al inicio */
+  transition: background-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+  box-shadow: none;
+}
+
+/* Cuando scrollea */
+nav.navbar.scrolled {
+  background-color: #e3d1bd;/* blanco con transparencia */
+  backdrop-filter: blur(8px); /* efecto de vidrio */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenedor principal */
 .navbar {
-  width: 100%;
-  background-color: #f8f5f2;
   padding: 10px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Contenedor principal dividido en 3 */
 .container-fluid {
   display: flex;
   justify-content: space-between;
@@ -16,46 +27,48 @@
   width: 100%;
 }
 
-/* ----- IZQUIERDA: LOGO + TÍTULO ----- */
+/* */
 .logoNav {
   width: 60px;
   height: 60px;
   border-radius: 10%;
   object-fit: cover;
-  margin: 0 10px;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .TitleLogo {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   font-size: 1.3rem;
-  color: #a36d35;
+  color: #fff;
   text-decoration: none;
 }
 
-/* CONTENIDO / LINKS */
-.center-item {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.navbar-nav .nav-link {
-  color: #333;
-  font-weight: 500;
-  margin: 0 10px;
-  transition: color 0.3s ease;
+.logoNav {
+  width: 45px;
+  height: 45px;
+  border-radius: 10%;
+  object-fit: cover;
 }
 
 /* ICONOS  */
 .containerIcons {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 15px;
   margin-right: 15px;
+  color: #fff;
 }
 
 .containerIcons svg {
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -67,6 +80,7 @@
 
 /* Carrito con contador */
 .cart-icon-container {
+  margin-right: 10px;
   position: relative;
 }
 
@@ -82,52 +96,8 @@
   border-radius: 50%;
 }
 
-/* ----- MOBILE ----- */
+/* MOBILE */
 @media (max-width: 600px) {
-  .container-fluid {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0;
-  }
-
-  /* Parte superior: logo + toggle */
-  .navbar-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 8px 15px;
-  }
-  .navbar-top .left-section {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .navbar-top .TitleLogo {
-    font-size: 1.1rem;
-  }
-
-  /* Centrar íconos abajo */
-  .containerIcons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 8px;
-    width: 100%;
-  }
-
-  .containerIcons svg {
-    width: 30px;
-    height: 30px;
-  }
-
-  .navbar-nav {
-    text-align: center;
-  }
-
-  /* Agrega un poco de margen a "Sobre Nosotros" */
-  .navbar-nav .nav-item:first-child .nav-link {
-    margin-left: 10px;
-  }
+  nav.navbar {flex-direction: column;}
+  .containerIcons { width: 100%; justify-content: center; margin-top: 6px; padding-bottom: 8px; }
 }

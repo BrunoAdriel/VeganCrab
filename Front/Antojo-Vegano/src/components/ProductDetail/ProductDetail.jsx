@@ -80,19 +80,10 @@ const ProductDetail = () =>{
         .catch((error) => console.error("Error en el Fetch de Productos", error));
     },[id])
 
-
     if(!product)return <p>Cargando...</p>;
 
-
-/*     useEffect(()=>{fetch("http://localhost:3000/products/2") 
-        .then((res)=> res.json()) 
-        .then((data)=> {console.log("Datos sobre Productos:", data.idProduct); setProduct(data.idProduct[0]); }) 
-        .catch((error) => console.error("Error en el Fetch de Productos", error)); },[])
-    
-        if(!product)return <p>Cargando...</p>;
- */
     return(<>
-
+    <div classname="page-content">
     {/* Btn para volver */}
     <BtnBack/>
 
@@ -120,6 +111,7 @@ const ProductDetail = () =>{
                 <img key={i} src={img} alt={`Thumb ${i + 1}`} className={mainImg === img ? "active-thumb" : ""} onClick={() => handleImage(img)} />))}
             </div>
         </div>
+    </div>
     </div>
     {/* Carruosel de productos */}
         <div className="section-title">

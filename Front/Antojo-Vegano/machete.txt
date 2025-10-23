@@ -7,3 +7,187 @@ const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   <svg ...>...</svg>
   {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
 </div>
+
+csss
+
+/* Contenedor Principal */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Estado inicial (sin scroll) */
+  background-color: #f5a365; /* color visible */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  transition: background-color 0.6s ease, 
+              box-shadow 0.4s ease,
+              backdrop-filter 0.6s ease;
+  z-index: 2000;
+}
+
+/* Cuando Scrolleo */
+.navbar.scrolled {
+  background-color: rgba(245, 163, 101, 0.05); /* casi transparente */
+  backdrop-filter: blur(8px); /* efecto vidrio */
+  box-shadow: none;
+}
+
+
+/* Contenedor principal dividido en 3 */
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+/* IZQUIERDA: LOGO + TÍTULO  */
+.logoNav {
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
+  object-fit: cover;
+  margin: 0 10px;
+}
+
+.TitleLogo {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #a36d35;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* CONTENIDO / LINKS */
+.center-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-nav .nav-link {
+  color: #333;
+  font-weight: 500;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+/*  */
+
+.navbar.scrolled .TitleLogo {
+  color: #a36d35; /* marrón cuando el fondo es transparente */
+}
+
+.navbar-nav .nav-link {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.navbar.scrolled .nav-link {
+  color: #2a2a2a;
+}
+
+.containerIcons svg {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.navbar.scrolled .containerIcons svg {
+  color: #2a2a2a;
+}
+
+/*  */
+
+/* ICONOS  */
+.containerIcons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 15px;
+}
+
+.containerIcons svg {
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.containerIcons svg:hover {
+  transform: scale(1.1);
+  color: #cfa97e;
+}
+
+/* Carrito con contador */
+.cart-icon-container {
+  position: relative;
+}
+
+.cart-icon-container::after {
+  content: attr(data-count);
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: #cfa97e;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* ----- MOBILE ----- */
+@media (max-width: 600px) {
+  .container-fluid {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  /* Parte superior: logo + toggle */
+  .navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 8px 15px;
+  }
+  .navbar-top .left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .navbar-top .TitleLogo {
+    font-size: 1.1rem;
+  }
+
+  /* Centrar íconos abajo */
+  .containerIcons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 8px;
+    width: 100%;
+  }
+
+  .containerIcons svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  /* Agrega un poco de margen a "Sobre Nosotros" */
+  .navbar-nav .nav-item:first-child .nav-link {
+    margin-left: 10px;
+  }
+}

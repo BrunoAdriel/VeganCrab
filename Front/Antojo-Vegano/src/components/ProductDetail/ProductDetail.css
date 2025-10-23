@@ -1,3 +1,8 @@
+/* Espacio dela paginaparael nav */
+.page-content{
+    padding-top: 130px;
+}
+
 /* Clases del contenedor de la imagen */
 
 .product-detail{
@@ -118,8 +123,6 @@
 .thumbnail-gallery img.active-thumb {
     border: 2px solid #000000 
 }
-
-
 
 /* Después de los 600px */
 @media (max-width: 600px) {
