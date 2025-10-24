@@ -4,7 +4,7 @@ import './Navbar.css';
 import logo from '../../assets/LogoAntojo.jpg';
 import SearchBar from "../SearchBar/SearcBar";
 import { CartManager } from "../HookCartManager/CartManager";
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const NavigationBar = () => {
     const {totalItems}= CartManager() /* Acceso a las funciones */
@@ -30,19 +30,18 @@ return (<>
                 {/* Contenedor del titulo y logo */}
                     <div className="left-section">
                         <img src={logo} alt="Logo" className="logoNav" />
-                        <a className="TitleLogo">Antojo Vegano</a>
+                        <a href="/" className="TitleLogo">Antojo Vegano</a>
                     </div>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
                 {/* Contenedor de info */}
-                <div className="collapse navbar-collapse" id="navbarSupportedContent" >
+                <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent" >
                     <ul className="navbar-nav">
-                        <li className="nav-item"><a className="nav-link active" href="#">Sobre Nosotros</a></li>
-                        <li className="nav-item"><a className="nav-link active" href="#">Contacto</a></li>
-                        <li className="nav-item"><a className="nav-link active" href="/productos">Productos</a>
-                        </li>
+                        <li className="nav-item d-flex justify-content-center"><a className="nav-link active" href="#">Sobre Nosotros</a></li>
+                        <li className="nav-item d-flex justify-content-center"><a className="nav-link active" href="#">Contacto</a></li>
+                        <li className="nav-item d-flex justify-content-center"><a className="nav-link active" href="/productos">Productos</a></li>
                     </ul>
                 </div>
             </div>

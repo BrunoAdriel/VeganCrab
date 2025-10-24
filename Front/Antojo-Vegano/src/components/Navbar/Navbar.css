@@ -1,6 +1,6 @@
 /* Contenedor Principal */
 nav.navbar {
-  background-color: rgba(0, 0, 0, 0.03); /* transparente al inicio */
+  background-color: rgba(0, 0, 0, 0.05); /* transparente al inicio */
   transition: background-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
   box-shadow: none;
 }
@@ -27,11 +27,11 @@ nav.navbar.scrolled {
   width: 100%;
 }
 
-/* */
+
 .logoNav {
   width: 60px;
   height: 60px;
-  border-radius: 10%;
+  border-radius: 15%;
   object-fit: cover;
 }
 
@@ -45,8 +45,9 @@ nav.navbar.scrolled {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   font-size: 1.3rem;
-  color: #fff;
+  color: #a36d35;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .logoNav {

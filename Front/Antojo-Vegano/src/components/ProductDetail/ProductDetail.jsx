@@ -83,7 +83,7 @@ const ProductDetail = () =>{
     if(!product)return <p>Cargando...</p>;
 
     return(<>
-    <div classname="page-content">
+    <div className="page-content">
     {/* Btn para volver */}
     <BtnBack/>
 
