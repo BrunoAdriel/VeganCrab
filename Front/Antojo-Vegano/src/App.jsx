@@ -8,6 +8,8 @@ import ProductComponent from './components/ProductComponent/ProductComponent.jsx
 import Footer from './components/Footer/Footer.jsx';
 import Cart from './components/Cart/Cart.jsx';
 import CartDetail from './components/CartDetail/CartDetail.jsx';
+import AboutUs from './components/AboutUs/AboutUs.jsx';
+import Contact from './components/Contact/Contact.jsx';
 
 
 function App() {
@@ -15,13 +17,15 @@ function App() {
     <>
     <Router>
       <NavigationBar/>
-      <Cart></Cart>
+      <Cart/>
       <main>
         <Routes>
           <Route path='/' element={<ProductManager/>} />
           <Route path='/products/:id' element={<ProductDetail/>} />
           <Route path='/productos' element={<ProductComponent/>} />
           <Route path="/cart" element={<CartDetail />} />
+          <Route path='/Sobre-Nosotros' element={<AboutUs/> } />
+          <Route path='/Contacto' element={<Contact/>} />
         </Routes>
       </main>
       <Footer></Footer>

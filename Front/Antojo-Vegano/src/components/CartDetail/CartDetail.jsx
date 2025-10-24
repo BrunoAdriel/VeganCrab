@@ -1,13 +1,18 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { CartManager } from "../HookCartManager/CartManager";
+import  BtnBack  from "../BtnBack/BtnBack.jsx";
 import "./CartDetial.css";
 
 const CartDetail = () =>{
     const location = useLocation();
     const {cart, removeItem, envio, total, subTotal} = CartManager(); /* Acceso a las funciones */
 
-    return(
+    return(<>
+
+        <div className="page-content">
+        <BtnBack/>
+
         <div className="container mt-4">
             <h2 className="mb-4 text-center">Resumen de tu Carrito</h2>
                 {cart.length === 0 ? (
@@ -46,7 +51,8 @@ const CartDetail = () =>{
             </div>
             </>)}
         </div>
-    );
+        </div>
+    </>);
 };
 
 export default CartDetail;

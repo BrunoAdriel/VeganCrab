@@ -39,8 +39,8 @@ return (<>
                 {/* Contenedor de info */}
                 <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent" >
                     <ul className="navbar-nav">
-                        <li className="nav-item d-flex justify-content-center"><a className="nav-link active" href="#">Sobre Nosotros</a></li>
-                        <li className="nav-item d-flex justify-content-center"><a className="nav-link active" href="#">Contacto</a></li>
+                        <li className="nav-item d-flex justify-content-center"><a className="nav-link active" href="/Sobre-Nosotros">Sobre Nosotros</a></li>
+                        <li className="nav-item d-flex justify-content-center"><a className="nav-link active" href="/Contacto">Contacto</a></li>
                         <li className="nav-item d-flex justify-content-center"><a className="nav-link active" href="/productos">Productos</a></li>
                     </ul>
                 </div>
