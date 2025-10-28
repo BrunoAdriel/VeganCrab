@@ -106,8 +106,13 @@ const ProductComponent = () =>{
 
                 const backendImages = prod.images ? prod.images.split("|") : [];
                 const fallbackImages = imgMap[prod.idProduct] || [];
-                const images = backendImages.length > 0 ? backendImages : fallbackImages;
-                const price = prod.minPrice === prod.maxPrice ? `$ ${prod.minPrice}` : `$ ${prod.minPrice} - $ ${prod.maxPrice}`;
+                // Si la URL contiene 'drive.google.com', forzamos a usar el fallback
+                const shouldUseFallback =
+                  backendImages.length === 0 ||
+                  backendImages.some(url => url.includes("drive.google.com"));
+
+                const images = shouldUseFallback ? fallbackImages : backendImages;/*  backendImages.length > 0 ? backendImages : fallbackImages; */
+                const price = prod.minPrice === prod.maxPrice ? `$ ${prod.minPrice}` : `Mini $${prod.minPrice} - XL $${prod.maxPrice}`;
 
                 return (
                   <div className="col" key={prod.idProduct}>
