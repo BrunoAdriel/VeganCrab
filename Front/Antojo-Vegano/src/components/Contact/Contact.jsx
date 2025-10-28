@@ -5,19 +5,39 @@ import "./Contact.css";
 const Contact = () =>{
     const [email, setEmail] = useState(""); 
     const [mesaje, setMesaje] = useState("");
+    const [loading, setLoading] = useState(false);
 
     /* Controlador del Form */
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
 
         if(!email.trim() || !mesaje.trim()){
             alert("Por favor completa con tu mail y tu comnetario antes de enviar!.")
         return;
         }
+        setLoading(true);
 
-        alert("¡Gracias por dejarnos tu mensaje! te responderemos pronto.");
-        setEmail("");
-        setMesaje("");
+        try{
+            const res = await fetch("http://localhost:3000/api/contact/send-mail",{
+            method:"POST",
+            headers:{"content-type": "application/json"},
+            body: JSON.stringify({email, mesaje}),
+        });
+        const data = await res.json();
+
+        if(data.success){
+            alert("¡Gracias por dejarnos tu mensaje! te responderemos pronto.");
+            setEmail("");
+            setMesaje("");
+        }else{
+            alert("hubo un error al enviar el mensaje.")
+        }
+        }catch(error){
+            console.error("Error en el envio:", error);
+            alert("Error al enviar mensaje");
+        }finally{
+            setLoading(false);
+        }
     }
 
     return(<>
@@ -38,7 +58,16 @@ const Contact = () =>{
                     <label for="exampleFormControlTextarea1" className="form-label">Dejanos tu comentario</label>
                     <textarea onChange={(e) => setMesaje(e.target.value)} value={mesaje} className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Escribí tu mensaje aquí..."></textarea>
                 </div>
-                <button className="btn-see-more" type="submit">Enviar comentario</button>
+                {/* BTN con Spinner */}
+                <button className="btn-see-more" type="submit" disabled={loading}>            
+                    {loading ? (
+                        <div className="d-flex align-items-center justify-content-center">
+                            <strong role="status">Enviando mensaje...</strong>
+                            <div className="spinner-border ms-2" style={{ width: "1.3rem", height: "1.3rem" }} aria-hidden="true">
+                            </div>
+                        </div>
+                    ) : ("Enviar comentario")}
+                </button>
             </form>
             {/* Informacion personal */}
             <div className="container-map">
