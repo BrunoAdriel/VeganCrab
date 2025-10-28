@@ -13,7 +13,26 @@ const NavigationBar = () => {
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 50);
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        // Detectar apertura/cierre del menú mobile
+        const toggler = document.querySelector(".navbar-toggler");
+        const navbar = document.querySelector(".navbar");
+
+        const handleToggle = () => {
+            const expanded = toggler.getAttribute("aria-expanded") === "true";
+            if (expanded) {
+                navbar.classList.add("scrolled"); // aplica color de fondo
+            } else if (!expanded && window.scrollY < 50) {
+                navbar.classList.remove("scrolled"); // vuelve a transparente si está arriba
+            }
+        };
+
+        toggler?.addEventListener("click", handleToggle)
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            toggler?.removeEventListener("click", handleToggle);
+        }
     }, []);
 
 
