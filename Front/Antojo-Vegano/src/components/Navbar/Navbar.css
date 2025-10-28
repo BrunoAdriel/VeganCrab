@@ -85,7 +85,7 @@ nav.navbar.scrolled {
   position: relative;
 }
 
-.cart-icon-container::after {
+.cart-icon-container:not([data-count=""]):after {
   content: attr(data-count);
   position: absolute;
   top: -5px;
@@ -95,6 +95,11 @@ nav.navbar.scrolled {
   font-size: 0.7rem;
   padding: 2px 6px;
   border-radius: 50%;
+}
+
+/* Cuando esta en 0 Elimina el backgound */
+.cart-icon-container[data-count="0"]::after {
+  content: none;
 }
 
 /* MOBILE */

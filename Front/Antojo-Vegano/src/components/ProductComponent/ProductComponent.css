@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+/*     overflow: hidden; */
 }
 
 .container-prod-img img {
@@ -21,6 +21,9 @@
     display: flex;
     gap: 20px;
     margin: 20px;
+    align-items: flex-start;
+    position: relative;
+    z-index: 0;
 }
 
 /* Columna izquierda*/
@@ -31,7 +34,7 @@
     padding: 15px;
     border-radius: 8px;
     position: sticky;
-    top: 24%; /* se queda fijo al scrollear */
+    top: 25%; /* se queda fijo al scrollear */
     height: fit-content;
 }
 
