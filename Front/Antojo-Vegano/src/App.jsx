@@ -10,6 +10,7 @@ import Cart from './components/Cart/Cart.jsx';
 import CartDetail from './components/CartDetail/CartDetail.jsx';
 import AboutUs from './components/AboutUs/AboutUs.jsx';
 import Contact from './components/Contact/Contact.jsx';
+import EndPurchase from './components/EndPurchase/EndPurchase.jsx';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/cart" element={<CartDetail />} />
           <Route path='/Sobre-Nosotros' element={<AboutUs/> } />
           <Route path='/Contacto' element={<Contact/>} />
+          <Route path='/Finalizar-Compra' element={<EndPurchase/>} />
         </Routes>
       </main>
       <Footer></Footer>

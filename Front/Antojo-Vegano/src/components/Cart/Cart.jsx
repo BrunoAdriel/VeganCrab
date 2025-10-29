@@ -10,9 +10,16 @@ const Cart = () => {
 
     /* Funcion para ir a "Ver Carrito" */
     const handleGoToCart = () => {
-        /* Indico la ruta  */
+        /* Ocultu */
         setVisible(false);
+        /* Indico la ruta  */
         navigate("/cart", { state: { cart } });
+    };
+
+    /* Funcion para ir a Fiinalizar Compra */
+    const handleGoEndPurchase = () => {
+        setVisible(false);
+        navigate("/Finalizar-Compra", {state: {cart, subTotal, envio, total} });
     };
 
     /* Mostrar / Ocultar desde BTn o overlay */
@@ -59,7 +66,7 @@ const Cart = () => {
                 </div>
                 <div className="container-buttons">
                     <button className='btn-add' onClick={ handleGoToCart} >Ver Carrito</button>
-                    <button className='btn-add'>Finalizar Compra</button>
+                    <button className='btn-add' onClick={handleGoEndPurchase}>Finalizar Compra</button>
                 </div>
             </div>
         </div>
