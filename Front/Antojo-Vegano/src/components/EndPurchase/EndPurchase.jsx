@@ -1,12 +1,35 @@
 import React, {useState, useEffect} from "react";
 import { CartManager } from "../HookCartManager/CartManager";
 import BtnBack from "../BtnBack/BtnBack";
-
 import "./EndPurchase.css";
 
 const EndPurchase = () =>{
     /* Acceso a las funciones */
-    const {cart, removeItem, envio, total, subTotal} = CartManager();
+    const {cart, removeItem, envio, subTotal} = CartManager();
+    /* Constantes de gastos de deliveri */
+    const [deliveryType, setDeliveryType] = useState("Delivery");
+    const [deliveryCost, setDeliveryCost] = useState(envio);
+    const [total, setTotal] = useState(subTotal + deliveryCost);
+
+    /* Acutualizar el costo de envio */
+    useEffect(()=>{
+        if(deliveryType === "Delivery"){
+            setDeliveryCost(envio);
+        } else {
+            setDeliveryCost(0);
+        }
+    }, [deliveryType]);
+
+    // Actualizar total dinámicamente
+    useEffect(() => {
+        setTotal(subTotal + deliveryCost);
+    }, [subTotal, deliveryCost]);
+
+    /* Escucha el cambio de estado */
+    const handleDeliveryChange = (e) => {
+        setDeliveryType(e.target.value);
+    };
+
     return(<>
 
     {/* Btn Volver */}
@@ -67,7 +90,7 @@ const EndPurchase = () =>{
             <div className="container-select">
                 <div className="col-md-4">
                     <label for="inputDelivery" className="form-label">Tipo de entrega</label>
-                        <select id="inputDelivery" className="form-select">
+                        <select id="inputDelivery" className="form-select" value={deliveryType} onChange={handleDeliveryChange} >
                         <option selected>Delivery</option>
                         <option>Delivery</option>
                         <option>Retiro en el sucursal</option>
@@ -88,7 +111,6 @@ const EndPurchase = () =>{
                 {cart.length === 0 ? (
                     <p className="text-center">Tu carrito está vacío.</p>
                 ) : (<>
-                <div className="container-items">
                     <div className="table-responsive">
                         <table className="table table-secondary table-striped text-center align-middle">
                             <thead>
@@ -113,11 +135,12 @@ const EndPurchase = () =>{
                             </tbody>
                         </table>
                     </div>
-                </div>
                 {/* Sección de totales */}
                 <div className="d-flex flex-column align-items-end my-3">
                     <p className="mb-1">Subtotal : ${subTotal}</p>
-                    <p className="mb-1">Envío :  ${envio}</p>
+                    {deliveryCost > 0 && (
+                        <p className="mb-1">Envío : ${deliveryCost}</p>
+                    )}
                     <h5>Total a pagar: <strong>${total.toLocaleString()}</strong></h5>
                 </div>
                 </>)}

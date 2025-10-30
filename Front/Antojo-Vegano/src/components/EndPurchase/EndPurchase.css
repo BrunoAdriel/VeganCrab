@@ -42,7 +42,7 @@
 
 .container-table{
     margin-top: 5%;
-    width: 500px;
+    width: 100%;
 }
 
 
@@ -50,4 +50,5 @@
 @media (max-width: 600px) { 
     .container-form{ flex-direction: column;}
     .name-information{ display:flex ; flex-direction: column;}
+    .container-table { width: 100%; }
 }
