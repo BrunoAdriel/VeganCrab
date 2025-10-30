@@ -1,14 +1,53 @@
+
+/* Contenedor principal */
 .container-form{
     width: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-evenly;
 }
 
+/* Contenedores de la informacion */
 .rigth-container,
 .left-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-content: center;
+}
+
+/* Tamaño y direccion de los Nombres */
+.name-information{
+    display:flex ;
+    flex-direction: row;
+}
+.name-information input{
+    width: 270px;
+}
+
+/* Tamaño reducido del Zip */
+.zip-size input{
+    width: 100px;
+}
+
+/* Esito caja comentarios */
+.form-floating>label{
+    margin-left: 7px;
+}
+/* Tamaño de imputs select */
+.container-select select{
+    width: 300px;
+    margin: 5px 0px;
+}
+
+.container-table{
+    margin-top: 5%;
+    width: 500px;
+}
+
+
+/* MOBILE */
+@media (max-width: 600px) { 
+    .container-form{ flex-direction: column;}
+    .name-information{ display:flex ; flex-direction: column;}
 }

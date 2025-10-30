@@ -5,8 +5,8 @@ import BtnBack from "../BtnBack/BtnBack";
 import "./EndPurchase.css";
 
 const EndPurchase = () =>{
-    const {cart, removeItem, envio, total, subTotal} = CartManager(); /* Acceso a las funciones */
-
+    /* Acceso a las funciones */
+    const {cart, removeItem, envio, total, subTotal} = CartManager();
     return(<>
 
     {/* Btn Volver */}
@@ -21,12 +21,17 @@ const EndPurchase = () =>{
         <div className="rigth-container">
             {/* Nombre y Apellido */}
             <div className="row">
-                <div className="col">
-                    <input type="text" className="form-control" placeholder="First name" aria-label="First name"/>
+            <section className="name-information">
+                <div className="mb-3">
+                    <label for="inputName" className="form-label">Nombre</label>
+                    <input type="text" className="form-control" id="inputName" />
                 </div>
-                <div className="col">
-                    <input type="text" className="form-control" placeholder="Last name" aria-label="Last name"/>
+                <div className="mb-3">
+                    <label for="inputLast" className="form-label">Apellido</label>
+                    <input type="text" className="form-control" id="inputLast" />
                 </div>
+            </section>
+
             </div>
             {/* Telefono */}
             <div className="mb-3">
@@ -47,41 +52,79 @@ const EndPurchase = () =>{
                     <label for="inputCity" className="form-label">City</label>
                     <input type="text" className="form-control" id="inputCity"/>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-2 zip-size">
                     <label for="inputZip" className="form-label">Zip</label>
-                    <input type="text" className="form-control" id="inputZip" /> 
+                    <input type="text" className=" form-control" id="inputZip" /> 
                 </div>
         </div>
         <div className="left-container">
             {/* Comnetarios extras */}
-            <div className="form-floating">
-                <textarea className="form-control" placeholder="No dudes en dejarnos tu comentario" id="floatingTextarea2" ></textarea>
-                <label for="floatingTextarea2">Por algun detalle extra del produto</label>
-            </div>
+                <div className="form-floating">
+                    <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" ></textarea>
+                    <label for="floatingTextarea2">Informacion extra del pedido</label>
+                </div>
             {/* Devilery */}
-            <div className="col-md-4">
-                <label for="inputDelivery" className="form-label">Tipo de entrega</label>
-                    <select id="inputDelivery" className="form-select">
-                    <option selected>Delivery</option>
-                    <option>Delivery</option>
-                    <option>Retiro en el Local</option>
-                </select>
+            <div className="container-select">
+                <div className="col-md-4">
+                    <label for="inputDelivery" className="form-label">Tipo de entrega</label>
+                        <select id="inputDelivery" className="form-select">
+                        <option selected>Delivery</option>
+                        <option>Delivery</option>
+                        <option>Retiro en el sucursal</option>
+                    </select>
+                </div>
+                {/* Horario de entrega */}
+                <div className="col-md-4">
+                    <label for="inputTimeDilivery" className="form-label">Tipo de entrega</label>
+                    <select id="inputTimeDilivery" className="form-select">
+                        <option selected>Horario de entrega</option>
+                        <option>De 10hrs a 12hrs</option>
+                        <option>De 16hrs a 19hrs</option>
+                    </select>
+                </div>  
             </div>
-            {/* Horario de entrega */}
-            <div className="col-md-4">
-                <label for="inputTimeDilivery" className="form-label">Tipo de entrega</label>
-                <select id="inputTimeDilivery" className="form-select">
-                    <option selected>Horario de entrega</option>
-                    <option>De 10hrs a 12hrs</option>
-                    <option>De 16hrs a 19hrs</option>
-                </select>
-            </div>  
+                {/* info de los productos */}
+            <div  className="container-table">
+                {cart.length === 0 ? (
+                    <p className="text-center">Tu carrito está vacío.</p>
+                ) : (<>
+                <div className="container-items">
+                    <div className="table-responsive">
+                        <table className="table table-secondary table-striped text-center align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cart.map((prod) => (
+                                <tr key={prod.id}>
+                                    <td>{prod.name}</td>
+                                    <td>{prod.quantity}</td>
+                                    <td>${prod.price}</td>
+                                    <td>${prod.price * prod.quantity}</td>
+                                    <td><button className="btn btn-sm btn-outline-danger" onClick={() => removeItem(prod.id)}>✖</button></td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {/* Sección de totales */}
+                <div className="d-flex flex-column align-items-end my-3">
+                    <p className="mb-1">Subtotal : ${subTotal}</p>
+                    <p className="mb-1">Envío :  ${envio}</p>
+                    <h5>Total a pagar: <strong>${total.toLocaleString()}</strong></h5>
+                </div>
+                </>)}
+            </div>
         </div>
     </form>
-    {/* info de los productos */}
-    <div className="container-items">
 
-    </div>
     </>);
 };
 
