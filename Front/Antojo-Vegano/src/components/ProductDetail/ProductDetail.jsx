@@ -6,6 +6,7 @@ import medialuna2 from '../../../public/Products/Hojaldradas/CrossaintDeChocolat
 import CarrouselProducts from "../CarrouselProducts/CarrouselProducts.jsx";
 import { useParams } from "react-router-dom";
 import BtnBack from "../BtnBack/BtnBack.jsx";
+import { toast } from "react-toastify";
 
 
 const ProductDetail = () =>{
@@ -17,10 +18,11 @@ const ProductDetail = () =>{
     /* Handledel input */
     const handleAddToCart = () =>{
         if(!quantity ||  parseInt(quantity)<=0){
-            alert("Por favor, ingresa una cantidad valida");
+            /* alert("Por favor, ingresa una cantidad valida"); */
+            toast.warn("Por favor, ingresa una cantidad válida");
             return;
-        }console.log(`Agregaste al carrito: ${quantity} unidades de  ${product.prodName}`);
-
+        }/* console.log(`Agregaste al carrito: ${quantity} unidades de  ${product.prodName}`); */
+        
 
     /* Guardar los productos en el Local */
     const newItem = {
@@ -58,7 +60,8 @@ const ProductDetail = () =>{
 
 
     // Opcional: feedback visual
-    alert(`${newItem.quantity} ${newItem.name} agregado(s) al carrito`); console.log("carrito:", cart)
+/*     alert(`${newItem.quantity} ${newItem.name} agregado(s) al carrito`); console.log("carrito:", cart) */
+    toast.success(`Producto ${newItem.name} X ${newItem.quantity}  agregado al carrito 🎉`);
 
 };
 
