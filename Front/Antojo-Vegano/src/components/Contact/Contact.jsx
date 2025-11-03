@@ -49,7 +49,7 @@ const Contact = () =>{
         {/* Contenido principal de la pagina */}
         <div className="container-contact">
             {/* Datos de envio */}
-            <form className="container-form" onSubmit={handleSubmit}>
+            <form className="container-form contact-form" onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label for="exampleFormControlInput1" className="form-label">Email</label>
                     <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />

@@ -32,6 +32,7 @@ const EndPurchase = () =>{
 
     return(<>
 
+    <div className="page-content">
     {/* Btn Volver */}
     <BtnBack/>
     
@@ -40,10 +41,9 @@ const EndPurchase = () =>{
         <h2>Finalizar Compra</h2>
         <span></span>
     </div>
-    <form className="container-form">
+    <form className="container-form endpurchase-form">
         <div className="rigth-container">
             {/* Nombre y Apellido */}
-            <div className="row">
             <section className="name-information">
                 <div className="mb-3">
                     <label for="inputName" className="form-label">Nombre</label>
@@ -54,8 +54,6 @@ const EndPurchase = () =>{
                     <input type="text" className="form-control" id="inputLast" />
                 </div>
             </section>
-
-            </div>
             {/* Telefono */}
             <div className="mb-3">
                 <label for="inputNumber" className="form-label">Telefono</label>
@@ -63,8 +61,8 @@ const EndPurchase = () =>{
             </div>
             {/* Email */}
             <div className="mb-3">
-                <label for="exampleFormControlInput1" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                <label for="emailControl" className="form-label">Email address</label>
+                <input type="email" className="form-control" id="emailControl" placeholder="name@example.com"/>
             </div>
             {/* Direccion */}
                 <div className="col-12">
@@ -147,7 +145,7 @@ const EndPurchase = () =>{
             </div>
         </div>
     </form>
-
+</div>
     </>);
 };
 
