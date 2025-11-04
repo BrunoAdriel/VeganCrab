@@ -5,6 +5,7 @@ import medialuna1 from '../../../public/Products/Hojaldradas/CrossaintDeChocolat
 import medialuna2 from '../../../public/Products/Hojaldradas/CrossaintDeChocolate.jpg';
 import CarrouselProducts from "../CarrouselProducts/CarrouselProducts.jsx";
 import { useParams } from "react-router-dom";
+import { CartManager } from "../HookCartManager/CartManager.jsx";
 import BtnBack from "../BtnBack/BtnBack.jsx";
 import { toast } from "react-toastify";
 
@@ -14,15 +15,14 @@ const ProductDetail = () =>{
     const [quantity, setQuantity]= useState("");
     const [mainImg, setMainImg] = useState(logo);
     const [fade, setFade] = useState(false);
+    const { addItem } = CartManager();
 
     /* Handledel input */
     const handleAddToCart = () =>{
         if(!quantity ||  parseInt(quantity)<=0){
-            /* alert("Por favor, ingresa una cantidad valida"); */
             toast.warn("Por favor, ingresa una cantidad válida");
             return;
-        }/* console.log(`Agregaste al carrito: ${quantity} unidades de  ${product.prodName}`); */
-        
+        }
 
     /* Guardar los productos en el Local */
     const newItem = {
@@ -32,37 +32,9 @@ const ProductDetail = () =>{
         image: mainImg || "/placeholder.jpg",
         size: product.size || null,
         quantity: parseInt(quantity)
-    }
-
-
-    // Obtener el carrito existente o crear uno nuevo
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-
-    // Verificar si ya existe el producto en el carrito
-    const existingIndex = cart.findIndex(item => item.id === newItem.id && item.size === newItem.size);
-
-
-    // Si ya existe, sumamos la cantidad sino lo agrega
-    if (existingIndex >= 0) {
-        cart[existingIndex].quantity += newItem.quantity;
-    } else {
-        cart.push(newItem);
-    }
-
-
-    // Guardamos en localStorage
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    /* Emito el evento */
-    window.dispatchEvent(new Event("cartUpdated"));
-
-
-
-    // Opcional: feedback visual
-/*     alert(`${newItem.quantity} ${newItem.name} agregado(s) al carrito`); console.log("carrito:", cart) */
-    toast.success(`Producto ${newItem.name} X ${newItem.quantity}  agregado al carrito 🎉`);
-
+    };
+    /* Enviamos los datos a la funcion */
+    addItem(newItem);
 };
 
     /* Handle fade img */

@@ -11,7 +11,7 @@ import CartDetail from './components/CartDetail/CartDetail.jsx';
 import AboutUs from './components/AboutUs/AboutUs.jsx';
 import Contact from './components/Contact/Contact.jsx';
 import EndPurchase from './components/EndPurchase/EndPurchase.jsx';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {

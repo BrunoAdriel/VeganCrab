@@ -1,4 +1,5 @@
 import React,{ useState } from "react";
+import { toast } from "react-toastify";
 import BtnBack from "../BtnBack/BtnBack";
 import "./Contact.css";
 
@@ -12,7 +13,7 @@ const Contact = () =>{
         e.preventDefault();
 
         if(!email.trim() || !mesaje.trim()){
-            alert("Por favor completa con tu mail y tu comnetario antes de enviar!.")
+            toast.error("Por favor completa con tu mail y tu comnetario antes de enviar!.");
         return;
         }
         setLoading(true);
@@ -26,15 +27,14 @@ const Contact = () =>{
         const data = await res.json();
 
         if(data.success){
-            alert("¡Gracias por dejarnos tu mensaje! te responderemos pronto.");
+            toast.success("¡Gracias por dejarnos tu mensaje! te responderemos pronto. 💌");
             setEmail("");
             setMesaje("");
         }else{
-            alert("hubo un error al enviar el mensaje.")
+            toast.error("Hubo un error al enviar el mensaje. Vuelva a intentar ❌");
         }
         }catch(error){
-            console.error("Error en el envio:", error);
-            alert("Error al enviar mensaje");
+            toast.error("Hubo un error al enviar el mensaje.❌");
         }finally{
             setLoading(false);
         }

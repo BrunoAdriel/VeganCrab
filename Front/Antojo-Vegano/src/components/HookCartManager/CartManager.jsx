@@ -1,10 +1,13 @@
 import React,{useState, useEffect} from "react";
+import { toast } from "react-toastify";
+
 
 /* Hook osbre las acciones del Cart */
 export const CartManager = () =>{
 
     /* Recupero  los datos guardados */
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+    
 
     /* Actualizar Storage y estado */
     const updateStorage  = (newCart) =>{
@@ -19,8 +22,10 @@ export const CartManager = () =>{
     let updatedCart;
     if (existing) {
         updatedCart = cart.map( (p) => p.id === item.id ? { ...p, quantity: p.quantity + item.quantity } : p );
+        toast.warning(`Se agregaron ${item.quantity} más de ${item.name} 🛒`)
     } else {
         updatedCart = [...cart, item];
+        toast.success(`Agregaste  ${item.name} X ${item.quantity}  agregado al carrito 🎉`);
     }
     updateStorage(updatedCart);
     };
@@ -39,9 +44,15 @@ export const CartManager = () =>{
 
     /* Eliminar un producto */
     const removeItem = (id) => {
+        const productRemoved = cart.find((p) => p.id === id);
         const updatedCart = cart.filter((p) => p.id !== id);
         updateStorage(updatedCart);
-    };
+            if(productRemoved){
+                toast.warning(`🗑️ Se eliminó ${productRemoved.name} ${productRemoved.quantity} unidades`);
+            }else{
+                toast.info("El producto ya no esta el en carrito");
+            }
+        };
 
     /* Vaciar el carrito */
     const clearCart = () => updateStorage([]);
