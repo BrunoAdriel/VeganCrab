@@ -1,17 +1,33 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './SearchBar.css';
 
 
 const SearchBar = ({variant= "nav", onSearch}) =>{
     const [query,setQuery] =useState("");
     const [showSearch, setShowSearch] = useState(false);
+    const [results, setResults] = useState([]);
 
     /* Controlador de busqueda */
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
+        console.log("Ejecutando búsqueda con:", query);
         if(!query.trim()) return;
-        if (onSearch) onSearch(query);
-        console.log("Buscaste:", query); // Cambiar por Query  de SQL  
+/*         try{ */
+
+
+                useEffect(()=>{fetch(`http://localhost:3000/products/search?q=${encodeURIComponent(query)}`)
+                    .then((res)=> res.json())
+                    .then((data)=> {console.log("Resultado", data); setResults(data.filter || []); })
+                    .catch((error) => console.error("Error en el Fetch de Productos", error));
+                },[])
+/*             const res = await fetch(`http://localhost:3000/products/search?q=${encodeURIComponent(query)}`);
+            console.log("Status del fetch:", res.status);
+            const data = await res.json();
+            console.log("Resultado", data); */
+/*             setResults(data.filter || []); */
+/*         }catch(error){
+            console.error("Error al buscar", error);
+        } */
     }
 
     return(<>
@@ -32,6 +48,14 @@ const SearchBar = ({variant= "nav", onSearch}) =>{
                             <span className='icon'>🔍</span>
                         </button>
             </form>
+
+                {results.length > 0 && (
+                    <ul className="search-results">
+                        {results.map((item) => (
+                        <li key={item.idProduct}>{item.prodName} - ${item.unit_price}</li>
+                        ))}
+                    </ul>
+                    )}
         </div>
     </>)
 }

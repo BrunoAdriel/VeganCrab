@@ -1,6 +1,6 @@
 // LLama a las consultas SQL y armo la logica
 
-import {getProducts, getCategory, getCarrucel, getProductId, getProductsCard} from "../models/productModel.js";
+import {getProducts, getCategory, getCarrucel, getProductId, getProductsCard, getProductFilter} from "../models/productModel.js";
 
 // Obtengo los productos 
 export const importProducts = async (req, res) =>{
@@ -52,4 +52,18 @@ export const importProductsCard = async (req, res)=>{
     }catch(error){
         res.status(500).json({message:"Error al obtener los productos para las cards", error})
     }
+}
+
+//Manejo el mensaje resivido y la devolucion
+export const importProductSerach = async ( req, res ) => {
+    try{
+        const {q} = req.query;
+
+        if( !q || q.trim() === ""){
+            res.status(500).json({message:"Faltan parametros de busqueda", error})
+        }
+
+        const filter = await getProductFilter(q)
+        res.status(200).json({message:"Producto encontrado", filter})
+    }catch(error){}
 }

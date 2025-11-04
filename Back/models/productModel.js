@@ -72,3 +72,13 @@ GROUP_CONCAT(i.img_url, i.main_img SEPARATOR '|') AS images
                 LEFT JOIN product_img i ON p.idProduct = i.idProduct
                 GROUP BY p.idProduct
 */
+
+/* Obtengo la respuesta al producto solicitado */
+export const getProductFilter = async(q)=>{
+        const [rows] = await pool.query(
+                `SELECT idProduct, prodName, unit_price, image FROM products 
+                WHERE prodName LIKE ? OR prodDescription LIKE ?`,
+                [`%${q}%`, `%${q}%`]
+    );
+    return rows;
+};
