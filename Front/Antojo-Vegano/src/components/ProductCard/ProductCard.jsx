@@ -15,7 +15,9 @@ const ProductCard = ({product, images, price}) =>{
                             <h5 className="card-title">{product.prodName}</h5>
                             <p className="card-text">{product.prodDescription}</p>
                             <p className="card-text">{price} </p>
-                            <Link to={`/products/${product.idProduct}`} className='button-card' id={product.idProduct}>Seleccionar Opcion</Link>
+                            <Link to={`/products/${product.idProduct}`} className='button-card' id={product.idProduct}
+                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                            >Seleccionar Opcion</Link>
                         </div>
                 </div>
     </>)

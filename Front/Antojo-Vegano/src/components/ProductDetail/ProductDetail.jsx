@@ -17,10 +17,19 @@ const ProductDetail = () =>{
     const [fade, setFade] = useState(false);
     const { addItem } = CartManager();
 
+      /* Gradiante toastify */
+/*     const toastColors = {
+        success: "linear-gradient(to right, #00b09b, #96c93d)",
+        error: "linear-gradient(to right, #d32f2f, #ff5252)",
+        warning: "linear-gradient(to right, #f7b733, #fc4a1a)",
+    }; */
+
+
     /* Handledel input */
     const handleAddToCart = () =>{
         if(!quantity ||  parseInt(quantity)<=0){
-            toast.warn("Por favor, ingresa una cantidad válida");
+/*             toast.warning("Por favor, ingresa una cantidad válida",{ style: {background:  toastColors.warning}})
+ */            toast.warn("Por favor, ingresa una cantidad válida");
             return;
         }
 

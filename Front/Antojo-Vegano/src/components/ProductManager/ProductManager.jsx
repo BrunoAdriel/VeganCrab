@@ -94,7 +94,7 @@ const ProductManager = ()  => {
         </div>
             {/* Botón VER MÁS */}
             <div className="see-more-btn-container">
-                <Link to="/productos" className="btn-see-more">VER MÁS</Link>
+                <Link to="/productos" className="btn-see-more" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>VER MÁS</Link>
             </div>
         </div>
     </>)
