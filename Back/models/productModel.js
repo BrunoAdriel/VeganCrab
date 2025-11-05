@@ -76,8 +76,18 @@ GROUP_CONCAT(i.img_url, i.main_img SEPARATOR '|') AS images
 /* Obtengo la respuesta al producto solicitado */
 export const getProductFilter = async(q)=>{
         const [rows] = await pool.query(
-                `SELECT idProduct, prodName, unit_price, image FROM products 
-                WHERE prodName LIKE ? OR prodDescription LIKE ?`,
+                `SELECT p.idProduct, p.prodName, p.prodDescription, 
+                        c.categoryName, 
+                        MIN(v.unit_price) AS minPrice,
+                        MAX(v.unit_price) AS maxPrice,
+                        GROUP_CONCAT(i.img_url, i.main_img SEPARATOR '|') AS images
+                FROM products p
+                INNER JOIN categorys c ON p.idCategory = c.idCategory
+                LEFT JOIN products_variant v ON p.idProduct = v.idProduct
+                LEFT JOIN product_img i ON p.idProduct = i.idProduct
+                WHERE prodName LIKE ? OR prodDescription LIKE ?
+                GROUP BY p.idProduct, p.prodName, p.prodDescription
+                ORDER BY p.prodName ASC;`,
                 [`%${q}%`, `%${q}%`]
     );
     return rows;

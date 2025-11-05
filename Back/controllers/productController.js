@@ -58,12 +58,18 @@ export const importProductsCard = async (req, res)=>{
 export const importProductSerach = async ( req, res ) => {
     try{
         const {q} = req.query;
-
         if( !q || q.trim() === ""){
-            res.status(500).json({message:"Faltan parametros de busqueda", error})
+            return res.status(400).json({message:"Faltan parametros de busqueda", error})
         }
 
         const filter = await getProductFilter(q)
+        if (filter.length === 0) {
+            return res.status(404).json({ message: "No se encontraron productos con ese nombre" });
+        }
+
         res.status(200).json({message:"Producto encontrado", filter})
-    }catch(error){}
+    }catch(error){
+        console.error("❌ Error en importProductSerach:", error);
+        res.status(500).json({ message: "Error interno del servidor", error });
+    }
 }
