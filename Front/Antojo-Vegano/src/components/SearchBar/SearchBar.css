@@ -58,6 +58,78 @@
     border-bottom: 1px solid #000;
 }
 
+/* Caja flotante de resultados */
+.search-results-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 320px;
+    max-height: 280px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow-y: auto;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    margin-top: 8px;
+}
+
+/* Lista de resultados */
+.search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-results li {
+    border-bottom: 1px solid #eee;
+}
+
+.search-results li:last-child {
+    border-bottom: none;
+}
+
+/* Enlace de cada producto */
+.search-item-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-item {
+    display: flex;
+    color: #000;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.2s;
+}
+
+.search-item:hover {
+    background-color: #f9f9f9;
+}
+
+/* Imagen del producto */
+.search-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+/* Información del producto */
+.search-info h6 {
+    font-size: 0.95rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.search-info p {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 2px 0 0;
+}
+
+
 @media (min-width: 601px) {
     .only-mobile { display: none !important;}
     .search-box { display: flex;}
