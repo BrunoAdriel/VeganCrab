@@ -11,11 +11,28 @@ import { toast } from "react-toastify";
 
 
 const ProductDetail = () =>{
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState([]);
     const [quantity, setQuantity]= useState("");
+    const [selectedSize, setSelectedSize] = useState("");
     const [mainImg, setMainImg] = useState(logo);
     const [fade, setFade] = useState(false);
     const { addItem } = CartManager();
+    const { id }= useParams();   
+
+    // producto base (el primero del array o el único)
+    const mainProduct = product && product.length > 0 ? product[0] : null;
+
+    /* Coneccion */
+    useEffect(()=>{fetch(`http://localhost:3000/products/${id}`)
+        .then((res)=> res.json())
+        .then((data)=> {console.log("Datos sobre Productos:", data.idProduct);
+                        const prod = data.idProduct
+                        setProduct(Array.isArray(prod) ? prod : [prod])
+        })
+        .catch((error) => console.error("Error en el Fetch de Productos", error));
+    },[id])
+
+    if(!mainProduct)return <p>Cargando...</p>;
 
       /* Gradiante toastify */
 /*     const toastColors = {
@@ -25,21 +42,30 @@ const ProductDetail = () =>{
     }; */
 
 
-    /* Handledel input */
+    /* Handle agregar a carrito */
     const handleAddToCart = () =>{
+        /* Controla la cantidad */
         if(!quantity ||  parseInt(quantity)<=0){
 /*             toast.warning("Por favor, ingresa una cantidad válida",{ style: {background:  toastColors.warning}})
  */            toast.warn("Por favor, ingresa una cantidad válida");
             return;
         }
+        
+    /* Cotrolador del size */
+    if (product.length > 1 && !selectedSize) {
+        toast.warn("Por favor, selecciona un tamaño");
+        return;
+    }
 
+    /* Buscamos la variante elegida */
+    const chosenVariant = product.find((p) => p.size === selectedSize) || product[0];
     /* Guardar los productos en el Local */
     const newItem = {
-        id: product.idProduct,
-        name: product.prodName,
-        price: product.unit_price,
+        id: chosenVariant.idProduct,
+        name: chosenVariant.prodName,
+        price: parseFloat(chosenVariant.unit_price),
         image: mainImg || "/placeholder.jpg",
-        size: product.size || null,
+        size: chosenVariant.size,
         quantity: parseInt(quantity)
     };
     /* Enviamos los datos a la funcion */
@@ -55,17 +81,6 @@ const ProductDetail = () =>{
         }, 200)
     }
 
-    const { id }= useParams();   
-
-    
-    useEffect(()=>{fetch(`http://localhost:3000/products/${id}`)
-        .then((res)=> res.json())
-        .then((data)=> {console.log("Datos sobre Productos:", data.idProduct); setProduct(data.idProduct[0]); })
-        .catch((error) => console.error("Error en el Fetch de Productos", error));
-    },[id])
-
-    if(!product)return <p>Cargando...</p>;
-
     return(<>
     <div className="page-content">
     {/* Btn para volver */}
@@ -74,14 +89,30 @@ const ProductDetail = () =>{
     {/* Card Principal */}
     <div className="product-detail">
         <div className="image-section">
-            <img src={mainImg || "/placeholder.jpg"} alt={product.prodName} className={`main-image ${fade ? "fade" : ""}`}/>
+            <img src={mainImg || "/placeholder.jpg"} alt={mainProduct.prodName} className={`main-image ${fade ? "fade" : ""}`}/>
         </div>
         <div className="info-section">
-            <h2>{product.prodName}</h2>
-            <p>{product.prodDescription}</p>
-            <p className="price">{product.unit_price ? `$${product.unit_price}` : "Consultar precio"} </p>
+            <h2>{mainProduct.prodName}</h2>
+            <p>{mainProduct.prodDescription}</p>
+            <p className="price">
+                {mainProduct.unit_price ? `$${parseFloat(mainProduct.unit_price).toFixed(2)}` : "Consultar precio"}
+            </p>
 
-            {/* Input de cantidad */}
+            {/* Label de Tamaño (Si tiene) */}
+            {product.length > 1 && (
+                <div className="container-size">
+                    <label htmlFor="size">Tamaño:</label>
+                    <select id="size" value={selectedSize} onChange={(e)=>{setSelectedSize(e.target.value)}} required>
+                        <option value="">Seleccionar Tamaño</option>
+                        {product.map((p, i) => (
+                            <option key={i} value={p.size}>
+                                {p.size} - ${parseFloat(p.unit_price).toFixed(2)}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                )}
+            {/* Label de cantidad */}
             <div className="quantity-wrapper d-flex align-items-center">
                 <label htmlFor="quantity">Cantidad</label>
                 <input id="quantity" type="number" min="1" value={quantity} required onChange={(e)=> setQuantity(e.target.value)}/>
