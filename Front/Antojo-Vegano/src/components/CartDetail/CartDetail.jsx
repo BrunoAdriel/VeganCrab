@@ -7,7 +7,7 @@ import "./CartDetial.css";
 
 const CartDetail = () =>{
     const location = useLocation();
-    const {cart, removeItem, envio, total, subTotal} = CartManager(); /* Acceso a las funciones */
+    const {cart, removeItem, envio, total, subTotal, clearCart} = CartManager(); /* Acceso a las funciones */
 
     return(<>
 
@@ -45,11 +45,17 @@ const CartDetail = () =>{
                         </tbody>
                     </table>
                 </div>
+
           {/* Sección de totales */}
             <div className="d-flex flex-column align-items-end my-3">
                 <p className="mb-1">Subtotal : ${subTotal}</p>
-                <p className="mb-1">Envío :  ${envio}</p>
+                <p className="mb-2">Envío :  ${envio}</p>
                 <h5>Total a pagar: <strong>${total.toLocaleString()}</strong></h5>
+                {cart.length > 1 &&(
+                    <div>
+                        <button className='button-card mt-1' onClick={clearCart}>Vaciar Carrito</button>
+                    </div>
+                )}
                 <Link to="/Finalizar-Compra" className="btn btn-success mt-3" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                 >Finalizar Compra</Link>
             </div>

@@ -35,25 +35,24 @@ const ProductDetail = () =>{
     if(!mainProduct)return <p>Cargando...</p>;
 
       /* Gradiante toastify */
-/*     const toastColors = {
-        success: "linear-gradient(to right, #00b09b, #96c93d)",
-        error: "linear-gradient(to right, #d32f2f, #ff5252)",
-        warning: "linear-gradient(to right, #f7b733, #fc4a1a)",
-    }; */
+    const toastColors = {
+        success: "linear-gradient(90deg, #b8e994, #78e08f)",
+        error: "linear-gradient(90deg, #ff9a9e, #f6416c)",
+        warning: "linear-gradient(90deg, #f6d365, #fda085)"
+    };
 
 
     /* Handle agregar a carrito */
     const handleAddToCart = () =>{
         /* Controla la cantidad */
         if(!quantity ||  parseInt(quantity)<=0){
-/*             toast.warning("Por favor, ingresa una cantidad válida",{ style: {background:  toastColors.warning}})
- */            toast.warn("Por favor, ingresa una cantidad válida");
+            toast.warning("Por favor, ingresa una cantidad válida",{ style: {background:  toastColors.warning}})
             return;
         }
         
     /* Cotrolador del size */
     if (product.length > 1 && !selectedSize) {
-        toast.warn("Por favor, selecciona un tamaño");
+        toast.warning("Por favor, selecciona un tamaño válida",{ style: {background:  toastColors.warning}})
         return;
     }
 

@@ -4,7 +4,7 @@ import {CartManager} from "../HookCartManager/CartManager.jsx";
 import './Cart.css';
 
 const Cart = () => {
-    const {cart, removeItem, envio, total, subTotal } = CartManager(); /* Acceso a las funciones */
+    const {cart, removeItem, envio, total, subTotal, clearCart } = CartManager(); /* Acceso a las funciones */
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate(); /* Constante para marcar un punto de navegacion */
 
@@ -58,6 +58,13 @@ const Cart = () => {
                     );
                     })
                 )}
+                {/* Si hay productos en el carrito muestra el btn */}
+                {cart.length > 1 &&(
+                        <div>
+                            <button className='button-card' onClick={clearCart}>Vaciar Carrito</button>
+                        </div>
+                )}
+
                 </section>
                 <div className="cart-total">
                     <p className="mb-1">SubTotal: ${subTotal}</p>
