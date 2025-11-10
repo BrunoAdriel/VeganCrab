@@ -25,7 +25,7 @@ export const CartManager = () =>{
         toast.warning(`Se agregaron ${item.quantity} más de ${item.name} 🛒`)
     } else {
         updatedCart = [...cart, item];
-        toast.success(`Agregaste  ${item.name} X ${item.quantity}  agregado al carrito 🎉`);
+        toast.success(`Agregaste  ${item.name} X ${item.quantity} al carrito 🎉`);
     }
     updateStorage(updatedCart);
     };

@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { CartManager } from "../HookCartManager/CartManager";
+import { Link } from "react-router-dom";
 import  BtnBack  from "../BtnBack/BtnBack.jsx";
 import "./CartDetial.css";
 
@@ -25,6 +26,7 @@ const CartDetail = () =>{
                                 <th scope="col">Producto</th>
                                 <th scope="col">Cantidad</th>
                                 <th scope="col">Precio</th>
+                                <th scope="col">Tamaño</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Eliminar</th>
                             </tr>
@@ -35,6 +37,7 @@ const CartDetail = () =>{
                                 <td>{prod.name}</td>
                                 <td>{prod.quantity}</td>
                                 <td>${prod.price}</td>
+                                <td>{prod.size || " - "}</td>
                                 <td>${prod.price * prod.quantity}</td>
                                 <td><button className="btn btn-sm btn-outline-danger" onClick={() => removeItem(prod.id)}>✖</button></td>
                             </tr>
@@ -47,7 +50,8 @@ const CartDetail = () =>{
                 <p className="mb-1">Subtotal : ${subTotal}</p>
                 <p className="mb-1">Envío :  ${envio}</p>
                 <h5>Total a pagar: <strong>${total.toLocaleString()}</strong></h5>
-                <button className="btn btn-success mt-3">Finalizar Compra</button>
+                <Link to="/Finalizar-Compra" className="btn btn-success mt-3" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                >Finalizar Compra</Link>
             </div>
             </>)}
         </div>
