@@ -10,6 +10,8 @@ const EndPurchase = () =>{
     const [deliveryType, setDeliveryType] = useState("Delivery");
     const [deliveryCost, setDeliveryCost] = useState(envio);
     const [total, setTotal] = useState(subTotal + deliveryCost);
+    const [discountCode, setDiscountCode] = useState("");
+    const [discountValue, setDiscountValue] = useState(0);
 
     /* Acutualizar el costo de envio */
     useEffect(()=>{
@@ -25,10 +27,26 @@ const EndPurchase = () =>{
         setTotal(subTotal + deliveryCost);
     }, [subTotal, deliveryCost]);
 
+    // Actualizar el costo por descuento
+    useEffect(()=>{
+        if(discountCode==="DescuentoVegano"){
+            setDiscountValue(subTotal * 0.15);
+        }else{
+            setDiscountValue(0);
+        }
+    }, [discountCode, subTotal]);
+
+
     /* Escucha el cambio de estado */
     const handleDeliveryChange = (e) => {
         setDeliveryType(e.target.value);
     };
+
+    /* Escucha el cambio de percio por descuento */
+    const handleDiscountChange = (e) => {
+        setDiscountCode(e.target.value);
+    };
+    const finalTotal = total - discountValue;
 
     return(<>
 
@@ -141,7 +159,24 @@ const EndPurchase = () =>{
                     {deliveryCost > 0 && (
                         <p className="mb-1">Envío : ${deliveryCost}</p>
                     )}
-                    <h5>Total a pagar: <strong>${total.toLocaleString()}</strong></h5>
+                {/* Descuento */}
+                <div className="mb-3">
+                    <label htmlFor="discountInput"  className="form-label fw-semibold">¿Tenés un descuento?</label>
+                    <input type="text" className="form-control" id="discountInput" value={discountCode} onChange={handleDiscountChange}/>
+                </div>
+                {discountValue > 0 &&(
+                    <p className="text-success"> ✅ Código aplicado: -15% (${discountValue.toFixed(2)}) </p>
+                )}
+                {/* Precio tachado + nuevo */}
+                {discountValue > 0 ? (<>
+                    <section className="center-discount">
+                        <h6 className="text-muted text-decoration-line-through"> Total original: ${total.toLocaleString()} </h6>
+                        <h5 className="fw-bold text-success"> Total con descuento: ${finalTotal.toLocaleString()} </h5>
+                    </section>
+                    </>
+                    ) : (
+                        <h5> Total a pagar: <strong>${total.toLocaleString()}</strong> </h5>
+                    )}
                 </div>
                 </>)}
             </div>

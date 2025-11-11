@@ -57,4 +57,5 @@
     .name-information{flex-direction: column;  align-items: center;  margin-left: 1%;  align-self: flex-start; }
     .name-information input{width: 95%;}
     label.form-label { margin-left: 5%;  align-self: flex-start; } 
+    .center-discount{display: flex; flex-direction: column; justify-content: center;}
 }
