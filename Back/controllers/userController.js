@@ -1,6 +1,6 @@
 // LLama a las consultas SQL y arma la logica
 
-import {insertUser, isRegister, validateUser, newPass, newAddress, dropUser} from "../models/userModel.js";
+import {insertUser, getUserByPhone, validateUser, newPass, newAddress, dropUser} from "../models/userModel.js";
 
 // Crea al usuario sui el numero no esta registrado
 
@@ -8,7 +8,7 @@ export const createUser = async (req, res) =>{
     const {userName, userLastName, phone, address, pass, birtday} = req.body;
 
     try{
-        const existing = isRegister(phone);
+        const existing = getUserByPhone(phone);
         if(existing){
             res.status(409).jsno({message:"Numero de telefono ya registrado"});
         }

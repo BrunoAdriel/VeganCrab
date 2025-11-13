@@ -2,16 +2,64 @@ import React, {useState, useEffect} from "react";
 import { CartManager } from "../HookCartManager/CartManager";
 import BtnBack from "../BtnBack/BtnBack";
 import "./EndPurchase.css";
+import { toast } from "react-toastify";
 
 const EndPurchase = () =>{
     /* Acceso a las funciones */
     const {cart, removeItem, envio, subTotal} = CartManager();
-    /* Constantes de gastos de deliveri */
+    /* Constantes de gastos de deliveri, manejo del total, codigo de descuento */
     const [deliveryType, setDeliveryType] = useState("Delivery");
     const [deliveryCost, setDeliveryCost] = useState(envio);
     const [total, setTotal] = useState(subTotal + deliveryCost);
     const [discountCode, setDiscountCode] = useState("");
     const [discountValue, setDiscountValue] = useState(0);
+    /* Constante de envio del formulario */
+    const [formData, setFormData] = useState({
+        name: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        address: "",
+/*         city: "", */
+        zip: "",
+        extra: "",
+        deliveryType: "Delivery",
+    });
+
+    /* Envio de los datos hacia el Back */
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        /* Validaciones para que el envio de los datos siempre sea correcto */
+        if(!formData.name.trim() || !formData.lastName.trim() || !formData.phone.trim() || !formData.email.trim() || !formData.address.trim() || !formData.zip.trim() || !formData.deliveryType.trim() || !formData.deliveryType.trim()){
+            toast.error("Por favor completa todo el formulario para poder continuar!");
+        return;
+        }
+
+        const payload = {
+            user: formData,
+            cart,
+            deliveryType,
+            deliveryCost,
+/*             discountValue, */
+            total: finalTotal
+        };
+        /* Verificoo el resultado */
+        console.log("Resultado de la informacion:", payload);
+
+        const res = await fetch("http://localhost:3000/orders/", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(payload)
+        });
+
+    const data = await res.json();
+
+/*     if (data.init_point) {
+        window.location.href = data.init_point; // Redirige a MP
+    } */
+    }
+
 
     /* Acutualizar el costo de envio */
     useEffect(()=>{
@@ -65,35 +113,35 @@ const EndPurchase = () =>{
             <section className="name-information">
                 <div className="mb-3">
                     <label for="inputName" className="form-label">Nombre</label>
-                    <input type="text" className="form-control" id="inputName" />
+                    <input type="text" className="form-control" id="inputName" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
                 </div>
                 <div className="mb-3">
                     <label for="inputLast" className="form-label">Apellido</label>
-                    <input type="text" className="form-control" id="inputLast" />
+                    <input type="text" className="form-control" id="inputLast" value={formData.lastName} onChange={(e) => setFormData({...formData, lastName: e.target.value})} />
                 </div>
             </section>
             {/* Telefono */}
             <div className="mb-3">
                 <label for="inputNumber" className="form-label">Telefono</label>
-                <input type="number" className="form-control" id="inputNumber" placeholder="1122334455"/>
+                <input type="number" className="form-control" id="inputNumber" placeholder="1122334455"  value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})}/>
             </div>
             {/* Email */}
             <div className="mb-3">
                 <label for="emailControl" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="emailControl" placeholder="name@example.com"/>
+                <input type="email" className="form-control" id="emailControl" placeholder="name@example.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}/>
             </div>
             {/* Direccion */}
                 <div className="col-12">
                     <label for="inputAddress" className="form-label">Address</label>
-                    <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"/>
+                    <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})}/>
                 </div>
-                <div className="col-md-6">
+{/*                 <div className="col-md-6">
                     <label for="inputCity" className="form-label">City</label>
                     <input type="text" className="form-control" id="inputCity"/>
-                </div>
+                </div> */}
                 <div className="col-md-2 zip-size">
                     <label for="inputZip" className="form-label">Zip</label>
-                    <input type="text" className=" form-control" id="inputZip" /> 
+                    <input type="text" className=" form-control" id="inputZip" value={formData.zip} onChange={(e) => setFormData({...formData, zip: e.target.value})}/> 
                 </div>
         </div>
         <div className="left-container">
@@ -182,6 +230,7 @@ const EndPurchase = () =>{
             </div>
         </div>
     </form>
+    <button type="button" onClick={handleSubmit}>Finalizar compra</button>
 </div>
     </>);
 };
