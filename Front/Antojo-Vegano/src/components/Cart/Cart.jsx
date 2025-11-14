@@ -60,7 +60,7 @@ const Cart = () => {
                 )}
                 {/* Si hay productos en el carrito muestra el btn */}
                 {cart.length > 1 &&(
-                        <div>
+                        <div className='d-flex justify-content-center'>
                             <button className='button-card' onClick={clearCart}>Vaciar Carrito</button>
                         </div>
                 )}

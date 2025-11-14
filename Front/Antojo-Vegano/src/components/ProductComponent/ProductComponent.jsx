@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import './ProductComponent.css';
 import ProductCard from "../ProductCard/ProductCard.jsx";
 import SearchBar from "../SearchBar/SearcBar";
@@ -60,6 +60,8 @@ const ProductComponent = () =>{
     const totalPages = Math.ceil(filteredProducts.length / productPage);
     const startIndex = (currentPage - 1) * productPage;
     const currentProducts = filteredProducts.slice( startIndex, startIndex + productPage );
+    /* Direccion de la paginacion hacia el titulo */
+    const titleRef = useRef(null);
 
     return(<>
 
@@ -90,7 +92,7 @@ const ProductComponent = () =>{
       <main className="products-section">
         <div className="section-title">
             <span></span>
-              <h2>{selectedCategory === "all" ? "Nuestros Productos" : `${selectedCategory}`}</h2>
+              <h2 ref={titleRef}>{selectedCategory === "all" ? "Nuestros Productos" : `${selectedCategory}`}</h2>
             <span></span>
           </div>
 
@@ -130,7 +132,15 @@ const ProductComponent = () =>{
         {totalPages > 1 && (
           <div className="pagination">
             {Array.from({ length: totalPages }, (_, index) => (
-                <button key={index + 1} className={currentPage === index + 1 ? "active" : ""} onClick={() => setCurrentPage(index + 1)}> {index + 1} </button>
+              <button key={index + 1} className={currentPage === index + 1 ? "active" : ""}
+                onClick={() => {
+                  setCurrentPage(index + 1);
+                  // Scroll al título
+                  if (titleRef.current) {
+                    const y = titleRef.current.getBoundingClientRect().top + window.scrollY - 80; 
+                    window.scrollTo({ top: y, behavior: "smooth" });
+                  }
+                }}> {index + 1} </button>
             ))}
           </div>
         )}

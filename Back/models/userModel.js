@@ -4,14 +4,14 @@ import pool from "../database/connection.js";
 
 // Cargo los usuarios a SQL
 
-export const insertUser = async (userName, userLastName, phone, address, zip, email )=>{
-    await pool.query("INSERT INTO users (userName, userLastName, phone, address, zip, email) VALUES (?,?,?,?,?,?)", [userName, userLastName, phone, address, zip, email]);
+export const insertUser = async (userName, userLastName, phone, address, email, zip )=>{
+    const [result] = await pool.query("INSERT INTO users (userName, userLastName, phone, address, email, zip) VALUES (?,?,?,?,?,?)", [userName, userLastName, phone, address, email, zip]);
     return result.insertId;
 };
 
 // Existe el usuario
 export const getUserByPhone = async (phone)=>{
-    const [rows] = await pool.query("SELECT phone FROM users WHERE phone = ?", [phone]);
+    const [rows] = await pool.query("SELECT idUser FROM users WHERE phone = ?", [phone]);
     return rows.length > 0 ? rows[0].idUser : null ;
 }
 

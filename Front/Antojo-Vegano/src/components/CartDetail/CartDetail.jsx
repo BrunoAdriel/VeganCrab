@@ -57,7 +57,7 @@ const CartDetail = () =>{
                     </div>
                 )}
                 <Link to="/Finalizar-Compra" className="btn btn-success mt-3" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                >Finalizar Compra</Link>
+                >Ralizar Pedido</Link>
             </div>
             </>)}
         </div>

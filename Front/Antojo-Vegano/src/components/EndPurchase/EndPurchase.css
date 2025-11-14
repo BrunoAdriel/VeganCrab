@@ -48,6 +48,15 @@
     width: 100%;
 }
 
+/* Hover del btnComprar */
+.endBtn{
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.endBtn:hover{
+    transform: scale(1.05);
+}
 
 /* MOBILE */
 @media (max-width: 600px) { 

@@ -13,6 +13,7 @@ const EndPurchase = () =>{
     const [total, setTotal] = useState(subTotal + deliveryCost);
     const [discountCode, setDiscountCode] = useState("");
     const [discountValue, setDiscountValue] = useState(0);
+    const [loading, setLoading] = useState(false);
     /* Constante de envio del formulario */
     const [formData, setFormData] = useState({
         name: "",
@@ -35,29 +36,35 @@ const EndPurchase = () =>{
             toast.error("Por favor completa todo el formulario para poder continuar!");
         return;
         }
+        setLoading(true);
+            try{
+                const payload = {
+                    user: formData,
+                    cart,
+                    deliveryType,
+                    deliveryCost,
+                    discountValue,
+                    total: finalTotal
+                };
+                /* Verificoo el resultado */
+                console.log("Resultado de la informacion:", payload);
 
-        const payload = {
-            user: formData,
-            cart,
-            deliveryType,
-            deliveryCost,
-/*             discountValue, */
-            total: finalTotal
-        };
-        /* Verificoo el resultado */
-        console.log("Resultado de la informacion:", payload);
+                const res = await fetch("http://localhost:3000/orders/", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(payload)
+                });
 
-        const res = await fetch("http://localhost:3000/orders/", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(payload)
-        });
+                const data = await res.json();
 
-    const data = await res.json();
-
-/*     if (data.init_point) {
-        window.location.href = data.init_point; // Redirige a MP
-    } */
+        /*     if (data.init_point) {
+                window.location.href = data.init_point; // Redirige a MP
+            } */
+        }catch(error){
+            toast.error("Hubo un error al realizar el pedido.❌");
+        }finally{
+            setLoading(false);
+        }
     }
 
 
@@ -96,6 +103,13 @@ const EndPurchase = () =>{
     };
     const finalTotal = total - discountValue;
 
+    /* Previene el "ENTER" en los inputs evita el refresco de la pagina y el error en la misma */
+    const preventEnter = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+        }
+    };
+
     return(<>
 
     <div className="page-content">
@@ -107,7 +121,7 @@ const EndPurchase = () =>{
         <h2>Finalizar Compra</h2>
         <span></span>
     </div>
-    <form className="container-form endpurchase-form">
+    <form className="container-form endpurchase-form" onSubmit={handleSubmit} onKeyDown={preventEnter}>
         <div className="rigth-container">
             {/* Nombre y Apellido */}
             <section className="name-information">
@@ -135,10 +149,6 @@ const EndPurchase = () =>{
                     <label for="inputAddress" className="form-label">Address</label>
                     <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})}/>
                 </div>
-{/*                 <div className="col-md-6">
-                    <label for="inputCity" className="form-label">City</label>
-                    <input type="text" className="form-control" id="inputCity"/>
-                </div> */}
                 <div className="col-md-2 zip-size">
                     <label for="inputZip" className="form-label">Zip</label>
                     <input type="text" className=" form-control" id="inputZip" value={formData.zip} onChange={(e) => setFormData({...formData, zip: e.target.value})}/> 
@@ -230,7 +240,9 @@ const EndPurchase = () =>{
             </div>
         </div>
     </form>
-    <button type="button" onClick={handleSubmit}>Finalizar compra</button>
+    <div className="d-flex justify-content-center mb-5">
+        <button className="btn btn-success endBtn" type="button" onClick={handleSubmit}>Finalizar Compra</button>
+    </div>
 </div>
     </>);
 };
