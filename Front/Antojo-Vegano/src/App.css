@@ -10,7 +10,7 @@ body {
 
 /* Estructura de la pagina */
 html, body, #root {
-  overflow-x: hidden;  /* elimina cualquier scroll horizontal global */
+  overflow-x: clip;  /* elimina cualquier scroll horizontal global */
   margin: 0;
   padding: 0;
 }

@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from "react";
 import './Carrousel.css';
+import { Link } from "react-router-dom";
 
 
 
@@ -41,7 +42,8 @@ const Carrousel = () => {
                                     <div className="carousel-caption d-flex justify-content-center align-items-center ">
                                         <div className=" caption-box animated-custom">
                                             <h5>{prod.prodName}</h5>
-                                            <p>{prod.prodDescription}</p>
+                                            <Link to={`/products/${prod.idProduct}`} className='linkClassCarrucel' id={prod.idProduct}
+                                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} >Ver Mas</Link>
                                         </div>
                                     </div>
                                 </div>

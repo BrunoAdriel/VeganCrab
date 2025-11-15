@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: visible !important;
 }
 
 .container-prod-img img {
@@ -34,7 +34,7 @@
     padding: 15px;
     border-radius: 8px;
     position: sticky;
-    top: 25%; /* se queda fijo al scrollear */
+    top: 125px; 
     height: fit-content;
 }
 
