@@ -5,7 +5,10 @@ import {insertOrder, insertOrderDetail, updateOrderStatus, getOrdersUsers} from 
 // Llama a las consultas del usuario
 import {insertUser, getUserByPhone} from "../models/userModel.js";
 
-
+// Importo controlador de MercadoPago
+import mercadopago from "mercadopago";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Crear las ordenes
 
@@ -65,11 +68,54 @@ export const createOrder = async (req, res)=> {
             );
         }
 
-        // 5. Respuesta
+        // 5. Crear respuesta para MercadoPago
+        const mpItems = cart.map((item)=>({
+            title:item.name,
+            quantity:Number(item.quantity),
+            currency_id: "ARS",
+            unit_price: Number(item.price),
+        }));
+
+        // Agregar envío
+        if (deliveryCost > 0) {
+            mpItems.push({
+                title: "Costo de envío",
+                quantity: 1,
+                currency_id: "ARS",
+                unit_price: Number(deliveryCost)
+            });
+        }
+
+    // Agregar descuento
+        if (discountValue > 0) {
+            mpItems.push({
+                title: "Descuento aplicado",
+                quantity: 1,
+                currency_id: "ARS",
+                unit_price: Number(-discountValue)
+            });
+        }
+
+        const preference = {
+            items: mpItems,
+            back_urls: {
+                success: process.env.BACK_URL_SUCCESS,
+                failure: process.env.BACK_URL_FAILURE,
+                pending: process.env.BACK_URL_PENDING,
+            },
+            auto_return:"approved",
+            external_reference: idOrder.toString(), // para saber qué orden es
+            notification_url: process.env.WEBHOOK_URL, // webhook
+        };
+
+        const mpRes = await mercadopago.preference.create(preference);
+
+        // 6. Respuesta al front: orden + init_point
         res.json({
             success: true,
             message: "Orden creada correctamente",
-            idOrder
+            idOrder,
+            init_point: mpRes.body.init_point,
         });
 
     } catch (error) {
