@@ -6,9 +6,14 @@ import {insertOrder, insertOrderDetail, updateOrderStatus, getOrdersUsers} from 
 import {insertUser, getUserByPhone} from "../models/userModel.js";
 
 // Importo controlador de MercadoPago
-import mercadopago from "mercadopago";
+import { MercadoPagoConfig, Preference } from "mercadopago";
 import dotenv from "dotenv";
 dotenv.config();
+
+const client = new MercadoPagoConfig({
+    accessToken: process.env.MP_ACCESS_TOKEN
+});
+const preferenceMP = new Preference(client);
 
 // Crear las ordenes
 
@@ -17,7 +22,7 @@ export const createOrder = async (req, res)=> {
         const {
             user,      // datos del form
             cart,      // carrito
-            deliveryType,
+            deliveryCost,
             discountValue,
             total,
             extraInfo
@@ -54,7 +59,7 @@ export const createOrder = async (req, res)=> {
             idUser,
             total,
             discountValue,
-            deliveryType,
+            deliveryCost,
             extraInfo
         );
 
@@ -96,7 +101,23 @@ export const createOrder = async (req, res)=> {
             });
         }
 
-        const preference = {
+
+        const mpRes = await preferenceMP.create({
+            body: {
+                items: mpItems,
+                back_urls: {
+                    success: process.env.BACK_URL_SUCCESS,
+                    failure: process.env.BACK_URL_FAILURE,
+                    pending: process.env.BACK_URL_PENDING,
+                },
+                auto_return: "approved",
+                external_reference: idOrder.toString(),
+                notification_url: "https://fawnlike-unrefractively-ferdinand.ngrok-free.dev/webhook"
+            }
+        });
+
+
+/*         const preference = {
             items: mpItems,
             back_urls: {
                 success: process.env.BACK_URL_SUCCESS,
@@ -105,10 +126,11 @@ export const createOrder = async (req, res)=> {
             },
             auto_return:"approved",
             external_reference: idOrder.toString(), // para saber qué orden es
-            notification_url: process.env.WEBHOOK_URL, // webhook
+            notification_url: "https://fawnlike-unrefractively-ferdinand.ngrok-free.dev/webhook",               // process.env.WEBHOOK_URL,  webhook
         };
 
-        const mpRes = await mercadopago.preference.create(preference);
+        const mpRes = await mercadopago.preferences.create(preference);
+         */
 
         // 6. Respuesta al front: orden + init_point
         res.json({
@@ -123,29 +145,9 @@ export const createOrder = async (req, res)=> {
         res.status(500).json({ success: false, message: "Error al crear la orden" });
     }
 
-
-    /*     
-    Estructura anterior
-    try{
-        const {idUser, items, discount} = req.body;
-
-        // Calcular el total
-        const total = items.reduce((acc, item) => acc + item.subTotal, 0 ) - (discount || 0);
-
-        // Crear las ordenes
-        const idOrder = await insertOrder(idUser, total, discount || 0);
-
-        // Insertar detalles al order detail
-        for(const item of items){
-            await insertOrderDetail(idOrder, item.idProduct, item.quantity, item.subTotal);
-        }
-
-        res.status(200).json({message: "Orden creada correctamente", idOrder});
-
-    }catch(error){
-        res.status(500).json({message: "Error al crear orden", error});
-    } */
 }
+
+
 
 // Cancela las ordenes
 

@@ -15,8 +15,9 @@ export const insertOrderDetail =  async (idOrder, idProduct, quantity, subTotal)
 
 // Modifica el estado de la orden
 export const updateOrderStatus = async (idOrder, status) =>{
-    await pool.query("UPDATE INTO orders SET status = ? WHERE idOrder = ?", [status, idOrder]);
-}
+    const [result] = await pool.query("UPDATE orders SET status = ? WHERE idOrder = ?", [status, idOrder]);
+    return result.affectedRows > 0;
+};
 
 // Obtengo las ordenes de compra de los clientes
 export const getOrdersUsers = async (idUser) => {

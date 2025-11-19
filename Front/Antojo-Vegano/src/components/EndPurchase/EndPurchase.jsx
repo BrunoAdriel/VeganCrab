@@ -57,9 +57,11 @@ const EndPurchase = () =>{
 
                 const data = await res.json();
 
-        /*     if (data.init_point) {
-                window.location.href = data.init_point; // Redirige a MP
-            } */
+                if (data.success && data.init_point) {
+                    window.location.href = data.init_point; // Redirige a MP
+                }else{
+                    toast.error("No se pudo iniciar el pago. Intente nuevamente")
+                }
         }catch(error){
             toast.error("Hubo un error al realizar el pedido.❌");
         }finally{
